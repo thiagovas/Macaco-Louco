@@ -12,9 +12,17 @@
 #include <cctype>
 #include <string>
 #include <deque>
+#include "InstructionMemory.hpp"
+
 using namespace std;
 
-int main()
+int main(int argc, char *argv[])
 {
+
+	InstructionMemory m;
+	ifstream input (argv[1]);
+
+	m.init (input);
+
 	return 0;
 }
