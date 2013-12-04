@@ -25,6 +25,10 @@ int main(int argc, char *argv[])
 	}
 	
 	fstream output, inputInstructions, inputData;
+	InstructionMemory im;
+	DataMemory dm;
+		
+	
 	
 	
 	return 0;
