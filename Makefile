@@ -7,7 +7,7 @@ ALU: ALU.cpp ALU.hpp
 	g++ -c ALU.cpp
 
 Control: Control.cpp Control.hpp
-	g++ -c Control.hpp
+	g++ -c Control.cpp
 
 DataMemory: DataMemory.cpp DataMemory.hpp
 	g++ -c DataMemory.cpp
