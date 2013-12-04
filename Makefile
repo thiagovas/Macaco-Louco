@@ -1,7 +1,7 @@
-all: main
+# all: main
 
-main: main.cpp ALU Control DataMemory InstructionMemory Register Register ShiftLeft SignExtend.o
-	g++ main.cpp ALU.o Control.o DataMemory.o InstructionMemory.o Register.o Register.o ShiftLeft.o SignExtend.o -o main
+main: main.cpp ALU.o Control.o DataMemory.o InstructionMemory.o Register.o ShiftLeft.o SignExtend.o
+	g++ -std=c++0x main.cpp ALU.o Control.o DataMemory.o InstructionMemory.o Register.o ShiftLeft.o SignExtend.o -o main
 
 ALU: ALU.cpp ALU.hpp
 	g++ -c ALU.cpp
