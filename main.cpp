@@ -14,7 +14,13 @@
 #include <deque>
 using namespace std;
 
-int main()
+int main(int argc, char *argv[])
 {
+	ios::sync_with_stdio(false);
+	if(argc != 4)
+	{
+		cout << "Siga o padrao: ./<exec> <arquivo com instrucoes> <arquivo com dados>" << endl;
+		return 1;
+	}
 	return 0;
 }
