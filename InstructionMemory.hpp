@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <map>
 #include <fstream>
 
 using namespace std;
@@ -12,11 +13,13 @@ class InstructionMemory {
 
 private:
 	vector<vector<bool> > iMemory;
+	map<string, string> table;
 public:
 	InstructionMemory ();
 	~InstructionMemory ();
 
-	void init (fstream input);
+	void init (ifstream &input);
+	void imprime ();
 };
 
 #endif
