@@ -11,22 +11,20 @@
 #include <cstring>
 #include <vector>
 #include <fstream>
-
 using namespace std;
 
-string Assembly_to_binary (string &s);
-
 class DataMemory {
-private:
-	vector<vector<bool>	> dMemory;
+	private:
+		vector<vector<bool> > dMemory;
 
-public:
-	DataMemory ();
-	~DataMemory ();
+	public:
+		DataMemory();
+		~DataMemory();
 
-	// Imprime toda a mémória de instruções;
-	void imprime ();
-	
+		// Imprime toda a memória de instruções;
+		void Print();
+		void Push_back(vector<bool>);
+		void Clear();
 };
 
 #endif
