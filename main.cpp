@@ -12,6 +12,7 @@
 #include <cctype>
 #include <string>
 #include <deque>
+#include <fstream>
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -19,8 +20,12 @@ int main(int argc, char *argv[])
 	ios::sync_with_stdio(false);
 	if(argc != 4)
 	{
-		cout << "Siga o padrao: ./<exec> <arquivo com instrucoes> <arquivo com dados>" << endl;
+		cout << "Siga o padrao: ./<exec> <arquivo com instrucoes> <arquivo com dados> <arquivo de saida>" << endl;
 		return 1;
 	}
+	
+	fstream output, inputInstructions, inputData;
+	
+	
 	return 0;
 }
