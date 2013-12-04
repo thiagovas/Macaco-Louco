@@ -3,7 +3,7 @@
 // Construtor;
 DataMemory::DataMemory()
 {
-	//dMemory.resize (32, vector<bool> (16, false));
+	dMemory.resize (32, vector<bool> (16, false));
 }
 
 // Destrutor;
@@ -29,10 +29,9 @@ void DataMemory::Clear()
 	dMemory.clear();
 }
 
-void DataMemory::Push_back(vector<bool> input)
+void DataMemory::Edit(vector<bool> input, int index)
 {
 	if(input.size() > 16) throw "A memória de dados guarda somente 16 bits por célula.";
-	if(dMemory.size() > 32) throw "A memória de dados possui somente 32 posições.";
 	
 	vector<bool> data = input;
 	if(input.size() != 16) // Complementando o vector com 0's ate data ter 16 bits.
@@ -40,5 +39,5 @@ void DataMemory::Push_back(vector<bool> input)
 		for(int i = input.size(); i < 16; i++)
 			data.push_back(false);
 	}
-	dMemory.push_back(data);
+	dMemory[index] = data;
 }

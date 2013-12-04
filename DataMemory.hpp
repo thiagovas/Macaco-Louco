@@ -23,7 +23,7 @@ class DataMemory {
 
 		// Imprime toda a memória de instruções;
 		void Print();
-		void Push_back(vector<bool>);
+		void Edit(vector<bool>, int);
 		void Clear();
 };
 
