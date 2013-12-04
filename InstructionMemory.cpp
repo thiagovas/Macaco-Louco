@@ -48,10 +48,6 @@ InstructionMemory::InstructionMemory (){
 	table["M31"] = "11111";
 
 	string aux;
-
-	for (int i = 0; i <= 1024; i++){
-		aux = to_string (i);
-	}
 }
 
 // Destrutor;
@@ -77,36 +73,39 @@ void InstructionMemory::init (ifstream &input){
 		cout << "Oh crap!\n";
 	}
 
-	int line = 0;
+	string dest, reg1, reg2, op, binary;
+	string label;
+	bitset<5> bits;
 
-	string assembly, binary, aux;
+	while (true){
+		input >> op;
 
-	while (getline (input, assembly)){
+		if (!input) break;
 
 		binary.clear();
-		
-		if (assembly[0] == '1'){
-			binary = assembly;
+		bits.reset();
+
+		if (op == "ADD" || op == "SUB" || op == "AND" || op == "OR"){
+			input >> dest >> reg1 >> reg2;
+			binary += table[op] + table[reg1] + table[reg2] + dest;
+		}
+		else  if (op == "LWI"){
+			input >> reg1 >> label;
+			// bits = label;
+			cout << label << endl;
+			// cout << bits << ' ' << label << endl;
+			binary += table[op] + table[reg1] + "00000";
+		}
+		else if (op == "BNE"){
+			input >> reg1 >> reg2 >> label;
+		}
+		else if (op == "J"){
+			input >> label;
 		}
 		else {
-			for (int i=0; i <= assembly.size(); i++){
-				if (assembly[i] != ' ' && i != assembly.size()){
-					aux += assembly[i];
-				}
-				else {
-					cout << aux << endl;
-					binary += table[aux];
-					aux.clear();		
-				}
-			}
+			// JR;
+			input >> dest;
 		}
-
-		// Copia o código binario binario para uma posição na memória de dados;
-		for (int j = 0; j < 18; j++){
-			if (binary[j] == '0') iMemory[line][j] = false;
-			else iMemory[line][j] = true;
-		}
-
-		line++;
 	}
+
 }
