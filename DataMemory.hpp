@@ -14,9 +14,11 @@
 
 using namespace std;
 
+string Assembly_to_binary (string &s);
+
 class DataMemory {
 private:
-	vector<vector<bool>	> Memory;
+	vector<vector<bool>	> dMemory;
 
 public:
 	DataMemory ();
@@ -24,9 +26,6 @@ public:
 
 	// Imprime toda a mémória de instruções;
 	void imprime ();
-
-	// Recebe um arquivo e inicializa todas as 32 posições da memória de dados com o bínario.
-	void init (ifstream in);
 	
 };
 

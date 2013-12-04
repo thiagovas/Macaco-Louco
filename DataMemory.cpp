@@ -2,38 +2,22 @@
 
 // Construtor;
 DataMemory::DataMemory(){
-	Memory.resize (32, vector<bool> (16, false));
+	dMemory.resize (32, vector<bool> (16, false));
 }
 
 // Destrutor;
 DataMemory::~DataMemory (){
-	Memory.clear();
+	dMemory.clear();
 }
 
 // Imprime;
 void DataMemory::imprime (){
 
-	for (int i = 0; i < Memory.size(); i++){
-		for (int j = 0; j < Memory[i].size(); j++){
-			cout << Memory[i][j] << ' ';
+	for (int i = 0; i < dMemory.size(); i++){
+		for (int j = 0; j < dMemory[i].size(); j++){
+			cout << dMemory[i][j] << ' ';
 		}
 		cout << endl;
 	}
 	cout << endl;
-}
-
-void DataMemory::init (ifstream Data){
-
-	// Checa se o arquivo está aberto;
-	if (!Data.is_open()){
-		cout << "Sometimes shits happens\n";
-		return;
-	}
-
-	/* To-Do
-	 * Checar se a linha do arquivo é código assembly ou binario;
-		 * Se é binario, apenas copie para a memória
-		 * Senão traduza o código assembly para o bínario e cópie;
-	 * PRECISO DE OUTRAS BIBLIOTECAS PRONTAS PARA FAZER ISSO!
-	*/
 }
