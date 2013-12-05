@@ -14,6 +14,7 @@
 #include <string>
 #include <cstring>
 #include <vector>
+#include <utitlity>
 
 using namespace std;
 
@@ -22,7 +23,8 @@ class Control{
 private:
 	bool PCWriteCond,PCWrite,MemINSTRead,MemINSTWrite;
 	bool IRWrite,MemRead1,MemRead2,MemWrite1,MemWrite2;
-	bool PCSource,MemDest,AddresControl,ALUop,ALUSrcB,ALUSrcA;
+	bool MemDest,ALUSrcB,ALUSrcA;
+	pair<bool,bool> ALUop,AddresControl,PCSource;
 	int Cicle;
 	vector<bool> OPcode;
 
@@ -31,12 +33,14 @@ public:
 	~Control();
 
 	void setcicle(int);
+
+	/*EXECUTA O QUE PRECISAR DADO O CICLO*/
 	void do_your_job();
 
 	/*FETCH*/
 	void fetch();
 	/*BUSCA REGISTRADORES*/
-	void busca_reg();
+	void busca_reg(vector<bool>);
 	/*EXECUÇÃO*/
 	void executa();
 	/*CONCLUSÃO DE TIPO R*/
@@ -48,7 +52,7 @@ public:
 	/*CONCLUSÃO JUMP*/
 	void conclui_jump();
 	/*CONCLUSÃO JUMPR*/
-	void void conclui_jumpr();
+	void conclui_jumpr();
 
 
 };
