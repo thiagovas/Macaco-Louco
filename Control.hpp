@@ -60,7 +60,7 @@ public:
 
 	int next_stage(OPcode,Ciclo);
 
-	void Control::go_my_children_i_libert_you(Alu &, Alu &, Alu &, InstructionMemory & , DataMemory & )
+	void Control::go_my_children_i_libert_you(Alu &, Alu &, Alu &, InstructionMemory & , DataMemory & );
 
 };
 
