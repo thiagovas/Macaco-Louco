@@ -1,3 +1,6 @@
+/*Made By: Marcelo*/
+/*Revisao By : ?*/
+/*Versão 1.0*/
 // Arithmetic and Logic Unit
 #include "ALU.hpp"
 #include <cmath>
