@@ -207,3 +207,10 @@ int next_stage(OPcode,Stage){
 		return 0;
 	}
 }
+
+void Control::go_my_children_i_libert_you(Alu &alu1, Alu &alu2, Alu &alu1, InstructionMemory &ir , DataMemory &dm ){
+	alu1.ALUop_update(ALUOp.second,ALUOp.first);
+	alu2.ALUop_update(ALUOp.second,ALUOp.first);
+
+	return;
+}

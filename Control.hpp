@@ -15,6 +15,10 @@
 #include <cstring>
 #include <vector>
 #include <utitlity>
+#include "ALU.hpp"
+#include "DataMemory.hpp"
+#include "InstructionMemory.hpp"
+#include "Register.hpp"
 
 using namespace std;
 
@@ -55,6 +59,8 @@ public:
 	void conclui_jumpr();
 
 	int next_stage(OPcode,Ciclo);
+
+	void Control::go_my_children_i_libert_you(Alu &, Alu &, Alu &, InstructionMemory & , DataMemory & )
 
 };
 
