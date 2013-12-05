@@ -25,6 +25,7 @@ class Register
 		Register();
 		~Register();
 		void SetValue(string, vector<bool>);
+		//TODO: Fazer um Getter tbm
 };
 
 #endif
