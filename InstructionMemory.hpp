@@ -21,6 +21,7 @@ public:
 	~InstructionMemory ();
 
 	void init (ifstream &input);
+	vector<bool> getter (int pos);
 	void imprime ();
 };
 

@@ -73,7 +73,10 @@ void InstructionMemory::imprime (){
 	cout << endl;
 }
 
-// 
+vector<bool> InstructionMemory::getter (int pos){
+	return iMemory[pos];
+}
+
 void InstructionMemory::init (ifstream &input){
 
 	if (!input.is_open ()){
