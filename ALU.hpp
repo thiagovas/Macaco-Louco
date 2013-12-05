@@ -1,3 +1,7 @@
+/*Made By: Marcelo*/
+/*Revisao By : ?*/
+/*Versão 1.0*/
+
 #ifndef _ALU_hpp
 #define _ALU_hpp
 
@@ -23,7 +27,7 @@ class Alu{
 
 private:
 int ALUop;
-bool zero;
+bool zero,overflow;
 vector<bool> a;
 vector<bool> b;
 vector<bool> result;
@@ -58,21 +62,12 @@ public:
 	//IMPRIME NUMERO
 	void print();
 
+	// VERIFICA SE O POSSÍVEL RESULTADO É NEGATIVO
+	bool result_is_negative();
+
 };
 
 
-/*
-	class InstructionMemory {
 
-	private:
-		vector<vector<bool> > iMemory;
-	public:
-		InstructionMemory ();
-		~InstructionMemory ();
-
-		void init (fstream input);
-	};
-
-*/
 
 #endif
