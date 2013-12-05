@@ -30,4 +30,3 @@ BNE M0 M1 LABEL - Faz PC = LABEL se M0 != M1
 J 100 - Faz PC = 100
 
 JR M0 - Faz PC = M0
-
