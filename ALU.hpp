@@ -52,7 +52,11 @@ public:
 	// RETORNA O RESULTADO
 	vector<bool> result_value();
 
+	// VERIFICA SE A 
 	bool zero_value();
+
+	//IMPRIME NUMERO
+	void print();
 
 };
 

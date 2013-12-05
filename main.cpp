@@ -38,6 +38,10 @@ int main(int argc, char *argv[])
 	}
 	
 	fstream output, inputInstructions, inputData;
+	InstructionMemory im;
+	DataMemory dm;
+		
+	
 	
 	
 >>>>>>> ce3b11b36d7d6039e1594f81b8986e1631356bb9
