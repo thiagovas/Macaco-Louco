@@ -25,7 +25,7 @@ private:
 	bool IRWrite,MemRead1,MemRead2,MemWrite1,MemWrite2;
 	bool MemDest,ALUSrcB,ALUSrcA;
 	pair<bool,bool> ALUop,AddresControl,PCSource;
-	int Cicle;
+	int Stage;
 	vector<bool> OPcode;
 
 public:
@@ -54,6 +54,7 @@ public:
 	/*CONCLUSÃO JUMPR*/
 	void conclui_jumpr();
 
+	int next_stage(OPcode,Ciclo);
 
 };
 

@@ -56,17 +56,17 @@ void do_your_job(){
 
 	/*ESCOLHE QUAIS REGISTRADORES*/
 	switch(Cicle){
-		case 0: /*FETCH*/return;
-		case 1: /*BUSCA REGISTRADORES*/return;
+		case 0: 	/*FETCH*/						fetch(); Stage = next_stage(OPcode,Stage); return;
+		case 1: 	/*BUSCA REGISTRADORES*/			busca_reg(); Stage = next_stage(OPcode,Stage); return;
 		
 		/*PARA ONDE VOU? OPcode RESPONDERÁ*/
-		case 2: /*EXECUÇÃO*/return;
-		case 3: /*CONCLUSÃO DE TIPO R*/return;
-		case 4: /*TÉRMINO DO LOAD IMMEDIATE*/return;
-		case 5: /*VERIFICA BRANCH*/return;
-		case 6: /*CONCLUSÃO JUMP*/return;
-		case 7: /*CONCLUSÃO JUMPR*/return;
-		case default: cout << "Nao Conseguimos definir o Estado!\n "; return;
+		case 2: 	/*EXECUÇÃO*/					executa(); Stage = next_stage(OPcode,Stage); return;
+		case 3: 	/*CONCLUSÃO DE TIPO R*/			conclui_r(); Stage = next_stage(OPcode,Stage); return;
+		case 4: 	/*TÉRMINO DO LOAD IMMEDIATE*/	conclui_loadi(); Stage = next_stage(OPcode,Stage); return;
+		case 5: 	/*VERIFICA BRANCH*/				branch(); Stage = next_stage(OPcode,Stage); return;
+		case 6: 	/*CONCLUSÃO JUMP*/				conclui_jump(); Stage = next_stage(OPcode,Stage); return;
+		case 7: 	/*CONCLUSÃO JUMPR*/				conclui_jumpr(); Stage = next_stage(OPcode,Stage); return;
+		case default: cout << "Nao Conseguimos definir o Estado!\n "; Stage = 0;  return;
 
 
 	}
@@ -140,17 +140,70 @@ void Control::conclui_r(){
 }
 
 void Control::conclui_loadi(){
+	MemWrite1 = true;
+	MemWrite2 = false;
+	MemDst = make_pair(false,false);
+	Address Control = make_pair(true,true);
 
+	return;
 }
 
 void Control::branch(){
+	ALUSrcA = true;
+	ALUSrcB = false;
+	ALUOp = make_pair(false,true);
+	PCSource = make_pair(true,false);
+	PCWriteCond = true;
 
+	return;
 }
 
 void Control::conclui_jump(){
+	PCSource = make_pair(true,false);
+	PCWrite = true;
 
+	return;
 }
 
 void Control::conclui_jumpr(){
+	ALUSrcA = true;
+	PCSource = make_pair(true,true);
+	PCWrite = true;
 
+	return;
+}
+
+int next_stage(OPcode,Stage){
+	if(Stage == 0){
+		return 1;
+	}else if(Stage == 1){
+		/*TIPO R*/
+		if(!OPcode[2]){
+			return 2;
+		
+		/*LWI*/
+		}else if(OPcode[1] == false && OPcode[0] == false){
+			return 4;
+		
+		/*BNE*/
+		}else if(OPcode[1] == false && OPcode[0] == true){
+			return 5;
+
+		/*J*/
+		}else if(OPcode[1] == true && OPcode[0] == false){
+			return 6;
+		
+		/*JR*/
+		}else{
+			return 7;
+		}
+	
+	/*CONCLUSÃO TIPO R*/
+	}else if(Stage == 2){
+		return 3;
+	
+	/*TÉRMINO DE INSTRUÇÃO*/
+	}else{
+		return 0;
+	}
 }
