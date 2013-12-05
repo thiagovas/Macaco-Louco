@@ -2,6 +2,8 @@
 // Revised by: ? 
 // NOT READY YET
 
+#include "Control.hpp"
+
 // Control Logic
 void Control::Control(){
 	PCWriteCond = false;
