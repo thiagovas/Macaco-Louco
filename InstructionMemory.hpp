@@ -24,4 +24,7 @@ public:
 	void imprime ();
 };
 
+string int_to_bitstring (int label, int size);
+string invert (string s);
+
 #endif
