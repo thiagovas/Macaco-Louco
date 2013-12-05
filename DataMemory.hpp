@@ -11,19 +11,20 @@
 #include <cstring>
 #include <vector>
 #include <fstream>
+#include <map>
 using namespace std;
 
 class DataMemory {
 	private:
 		vector<vector<bool> > dMemory;
-
+		map<string, int> table;
 	public:
 		DataMemory();
 		~DataMemory();
 
 		// Imprime toda a memória de instruções;
 		void Print();
-		void Edit(vector<bool>, int);
+		void SetValue(string, vector<bool>);
 		void Clear();
 };
 
