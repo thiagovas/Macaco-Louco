@@ -1,4 +1,10 @@
 // This memory keeps the instructions
+
+/*
+	Author: Guilherme Vieira Leobas
+	Version: 1.0b
+*/
+
 #include "InstructionMemory.hpp"
 #include <string>
 
