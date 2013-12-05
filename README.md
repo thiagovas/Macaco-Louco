@@ -18,10 +18,10 @@ JR   - 	111
 
 FORMATO DAS INSTRUÇÕES;
 
-ADD M0 M1 M2
-AND M0 M1 M2
-SUB M0 M1 M2
-OR M0 M1 M2
+ADD M0 M1 M2 - M0 = M1 + M2
+AND M0 M1 M2 - M0 = M1 & M2
+SUB M0 M1 M2 - M0 = M1 - M2
+OR M0 M1 M2 - M0 = M1 | M2
 
 LWI M0 100 - Carrega em M0 a constante 100
 
