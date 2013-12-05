@@ -58,8 +58,9 @@ InstructionMemory::~InstructionMemory (){
 
 void InstructionMemory::imprime (){
 	for (int i = 0; i < iMemory.size(); i++){
-		for (int j = 0; j < iMemory[i].size(); j++){
-			cout << iMemory[i][j] << ' ';
+		for (int j = iMemory[i].size()-1; j >=0; j--){
+			cout << iMemory[i][j];
+			if (j == 5 || j == 10 || j == 15) cout << ' ';
 		}
 		cout << endl;
 	}
@@ -74,8 +75,9 @@ void InstructionMemory::init (ifstream &input){
 	}
 
 	string dest, reg1, reg2, op, binary;
-	string label;
-	bitset<5> bits;
+	int label, line;
+
+	line = 0;
 
 	while (true){
 		input >> op;
@@ -83,29 +85,59 @@ void InstructionMemory::init (ifstream &input){
 		if (!input) break;
 
 		binary.clear();
-		bits.reset();
 
 		if (op == "ADD" || op == "SUB" || op == "AND" || op == "OR"){
 			input >> dest >> reg1 >> reg2;
-			binary += table[op] + table[reg1] + table[reg2] + dest;
+			binary += invert(table[dest]) + invert(table[reg2]) + invert(table[reg1]) + invert(table[op]);
 		}
 		else  if (op == "LWI"){
 			input >> reg1 >> label;
-			// bits = label;
-			cout << label << endl;
-			// cout << bits << ' ' << label << endl;
-			binary += table[op] + table[reg1] + "00000";
+			binary += invert(int_to_bitstring (label, 10)) + invert(table[reg1]) + invert(table[op]);
 		}
 		else if (op == "BNE"){
 			input >> reg1 >> reg2 >> label;
+			binary += invert(int_to_bitstring (label, 10)) + invert(table[reg2]) + invert(table[reg1]) + invert(table[op]);
 		}
 		else if (op == "J"){
 			input >> label;
+			binary += invert(int_to_bitstring (label, 10)) + "00000" + invert(table[op]);
 		}
 		else {
 			// JR;
 			input >> dest;
+			binary += invert(table[dest]) + "000000000" + invert(table[op]);
 		}
+
+		for (int i = 0; i < 18; i++){
+			if (binary[i] == '0') iMemory[line][i] = 0;
+			else iMemory[line][i] = 1;
+		}
+
+		line++;
 	}
 
+}
+
+string int_to_bitstring (int label, int size){
+	
+	int x = 1 << size-1;
+	string binary;
+
+	while (x){
+		if (label&x) binary += '1';
+		else binary += '0';
+		x = x >> 1;
+	}
+
+	return binary;
+}
+
+string invert (string s){
+	string result;
+
+	for (int i=s.size()-1; i>=0; i--){
+		result += s[i];
+	}
+
+	return result;
 }
