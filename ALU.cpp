@@ -41,6 +41,27 @@ void Alu::setvalues(vector<bool> input_a,vector<bool> input_b,bool first_bit,boo
 
 }
 
+// ATUALIZA ALUOP
+void Alu::ALUop_update(bool first_bit, bool second_bit){
+	/*CONVERTE OS DOIS BITS DE BOOL PARA UMA CODIFICAÇÃO EM INTEIRO*/
+	// 0 = SOMA ; 1 = SUB ; 2 = AND ; 3 = OR;
+	if(first_bit == 0){
+		if(second_bit == 0){
+			ALUop = 0;
+		}else{
+			ALUop = 1;
+		}
+	}else{
+		if(second_bit == 0){
+			ALUop = 2;
+		}else{
+			ALUop = 3;
+		}
+	}
+
+	return;
+}
+
 /*ESCOLHE QUAL OPERAÇÃO FAZER DEPENDENDO DO ALUop*/
 void Alu::do_operation(){
 	switch (ALUop){

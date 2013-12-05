@@ -65,6 +65,8 @@ public:
 	// VERIFICA SE O POSSÍVEL RESULTADO É NEGATIVO
 	bool result_is_negative();
 
+	// ATUALIZA ALUop
+	void Alu::ALUop_update(bool first_bit, bool second_bit);
 };
 
 
