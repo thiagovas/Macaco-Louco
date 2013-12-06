@@ -41,7 +41,8 @@ void Mux::SetInput(vector<bool> first, vector<bool> second)
 {
 	this->input[0] = first;
 	this->input[1] = second;
-	this->input[2] = this->input[3] = NULL;
+	this->input[2].clear();
+	this->input[3].clear();
 }
 
 vector<bool> Mux::GetOutput()

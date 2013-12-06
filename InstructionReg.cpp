@@ -1,4 +1,4 @@
-#include "InstReg.hpp"
+#include "InstructionReg.hpp"
 
 InstReg::InstReg(){
 

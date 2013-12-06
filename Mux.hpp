@@ -16,6 +16,8 @@ class Mux{
 		vector<vector<bool> > input;
 		pair<bool, bool> controlSign;
 	public:
+		Mux();
+		~Mux();
 		// Seta o sinal do controle
 		void SetControlSign(pair<bool, bool>);
 		void SetControlSign(bool sign); //Mesma coisa do ser de cima, mas esse metodo serve para os muxes que tem somente dois inputs.
