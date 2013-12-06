@@ -15,6 +15,12 @@
 #include <sstream>
 using namespace std;
 
+
+/* Classe registrador
+*	Ela possui uma matriz com sete linhas, ou seja, uma linha para cada registrador que existe em nosso datapath.
+	[0] = PC
+	[1] = 
+*/
 class Register
 {
 	private:
