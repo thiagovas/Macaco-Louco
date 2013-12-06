@@ -72,7 +72,19 @@ void DataMemory::Init(ifstream &stream)
 	while(true)
 	{
 		stream >> input;
+<<<<<<< HEAD
+
 		if(not stream) break;
+
+		if(!stream) break;
+
+=======
+		if(not stream) break;
+<<<<<<< HEAD
+=======
+		if(!stream) break;
+>>>>>>> 1f5a9ab9c631a53f832ba258933fc2cc651b597f
+>>>>>>> 4797f4cd0417023e9c8721fa5e6077bd3451fcd4
 		i++;
 		if(input.size() == 0) continue;
 		
