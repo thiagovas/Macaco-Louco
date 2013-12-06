@@ -4,14 +4,13 @@ Register::Register()
 {
 	this->size = 16; //Numero de bits que um registrador guarda
 	reg.resize(7, vector<bool>(size, false));
-	table["000"] = 0;
-	table["001"] = 1;
-	table["010"] = 2;
-	table["011"] = 3; 
-	table["100"] = 4;
-	table["101"] = 5;
-	table["110"] = 6;
-	table["111"] = 7;
+	table["PC"] = 0;
+	table["A"] = 1;
+	table["B"] = 2;
+	table["C"] = 3; 
+	table["D"] = 4;
+	table["ALUout1"] = 5;
+	table["ALUout2"] = 6;
 }
 
 Register::~Register()
