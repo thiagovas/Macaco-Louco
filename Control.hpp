@@ -19,9 +19,7 @@
 #include "DataMemory.hpp"
 #include "InstructionMemory.hpp"
 #include "Register.hpp"
-
 using namespace std;
-
 
 class Control{
 	private:
@@ -62,5 +60,5 @@ class Control{
 
 		void go_my_child_i_free_you(Alu &, Alu &, InstructionMemory & , DataMemory & );	
 };
-	
+
 #endif
