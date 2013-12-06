@@ -36,10 +36,7 @@ int main(int argc, char *argv[])
 	Register reg;
 	Control controle;
     int instructionPos = 0;
-<<<<<<< HEAD
 	Alu alu1,alu2;
-=======
->>>>>>> b63225c08ce8e3b1c22476012c08c1bc5966302f
 
 	fData.open(argv[1]);
 	fInstructions.open(argv[2]);
