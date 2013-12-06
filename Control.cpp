@@ -179,7 +179,31 @@ void Control::next_stage(){
 	}
 }
 
-void Control::go_my_child_i_free_you(Alu &alu1, Alu &alu2, InstructionMemory &ir , DataMemory &dm ){
+void Control::go_my_children_i_free_you(Alu &alu1, Alu &alu2, InstructionMemory &im , DataMemory &dm   ){
 	alu1.ALUop_update(ALUOp.second,ALUOp.first);
 	alu2.ALUop_update(ALUOp.second,ALUOp.first);
+	im.update_signal(MemINSTWrite);
+}
+
+
+void Control::print(){
+	cout << "PCWriteCond : " << PCWriteCond << endl;
+	cout << "PCWrite : " << PCWrite << endl;
+	cout << "MemINSTRead : " << MemINSTRead << endl;
+	cout << "MemINSTWrite : " << MemINSTWrite << endl;
+	cout << "IRWrite : " << IRWrite << endl;
+	cout << "MemRead1 : " << MemRead1 << endl;
+	cout << "MemRead2 : " << MemRead2 << endl;
+	cout << "MemWrite1 : " << MemWrite1 << endl;
+	cout << "MemWrite2 : " << MemWrite2 << endl;
+	cout << "PCSource : " << PCSource.second << PCSource.first << endl;
+	cout << "MemDest : " << MemDest.second << MemDest.first << endl;
+	cout << "AddressControl : " << AddressControl.second << AddressControl.first << endl;
+	cout << "ALUOp : " << ALUOp.second << ALUOp.first << endl;
+	cout << "ALUSrcB : " << ALUSrcB << endl;
+	cout << "ALUSrcA : " << ALUSrcA << endl;
+	cout << "Stage : " << Stage << endl;
+	cout << "OPcode : " << OPcode[2] << OPcode[1] << OPcode[0] << endl << endl;
+	
+	return;
 }
