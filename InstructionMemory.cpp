@@ -124,6 +124,12 @@ vector<bool> InstructionMemory::get_instruction (int pos){
 	return iMemory[pos/18];
 }
 
+/*
+* Função: Retorna o opcode formatado em uma string;
+* Parâmetros(s): Posição da memória de instruções;
+* Return: Uma string contendo o opcode;
+* Observações: O sinal de leitura enviado pelo controle deve está setado como TRUE!
+*/
 string InstructionMemory::get_opcode_formatted (int pos){
 	if (pos % 18 != 0) cout << "Posição invalida\n";
 	if (pos / 18 > inst_size) cout << "Não existe instrução nessa posição!\n";
@@ -139,6 +145,12 @@ string InstructionMemory::get_opcode_formatted (int pos){
 	return invert(opcode_s);
 }
 
+/*
+* Função: Retorna os bits delimitados por[lower, upper] da posição indicada por "pos";
+* Parâmetros(s): Três inteiros indicando respectivamente o limite inferior, limite superior e a posição a ser lida;
+* Return: Um vector<bool> contendo os bits;
+* Observações: Nenhum;
+*/
 vector<bool> InstructionMemory::get_bits (int lower, int upper, int pos){
 	if (lower < 0 || upper > 18) cout << "Limites errados!\n";
 
@@ -151,6 +163,12 @@ vector<bool> InstructionMemory::get_bits (int lower, int upper, int pos){
 	return bits;
 }
 
+/*
+* Função: Retorna a instrução formatada.
+* Parâmetros(s): A posição da memória de dados;
+* Return: Um vector<vector<bool>> contendo a instrução formatada;
+* Observações: Nenhum;
+*/
 vector<vector<bool> > InstructionMemory::get_instruction_formatted (int pos){
 
 	if (!MemINSTRead) cout << "Você se esqueceu de mandar o sinal para leitura!\n";
