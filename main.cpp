@@ -49,7 +49,8 @@ int main(int argc, char *argv[])
 	/* Finalizando tudo. Fechando streams e limpando tudo. */
 	fData.close();
 	fInstructions.close();
-	fOutput.close();	
+	fOutput.close();
+
 	return 0;
 }
 
