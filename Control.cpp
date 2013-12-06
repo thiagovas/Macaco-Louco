@@ -182,8 +182,8 @@ void Control::go_my_children_i_free_you(Alu &alu1, Alu &alu2, InstructionMemory 
 	muxpcsource..SetControlSign(PCSource);
 	muxmemdest.SetControlSign(MemDest);
 	muxaddrescontrol.SetControlSign(AddressControl);
-	muxalusrca.SetControlSign(make_pair(ALUSrcA,false));
-	muxalusrcb.SetControlSign(make_pair(ALUSrcB,false));
+	muxalusrca.SetControlSign(ALUSrcA);
+	muxalusrcb.SetControlSign(ALUSrcB);
 
 }
 
