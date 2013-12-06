@@ -61,6 +61,35 @@ void DataMemory::Clear()
 	dMemory.clear();
 }
 
+void DataMemory::Init(ifstream &stream)
+{
+	if(!stream.is_open())
+		throw "A stream do arquivo com dados não está aberta.";
+	
+	string input;
+	int i = -1;
+	vector<bool> data;
+	while(true)
+	{
+		cin >> input;
+		if(not cin) break;
+		i++;
+		if(input.size() == 0) continue;
+		
+		/* Convertendo a string do arquivo de dados para um vector de bools. */
+		data.clear();
+		for(int cont = 0; i < input.size(); i++)
+		{
+			if(input[cont] == 0)
+				data.push_back(false);
+			else if(input[cont] == 1)
+				data.push_back(true);
+			else
+				throw "Dados inválidos no arquivo com dados.";
+		}
+	}
+}
+
 void DataMemory::SetValue(string index, vector<bool> input)
 {
 	if(input.size() > 16) throw "A memória de dados guarda somente 16 bits por célula.";
@@ -75,6 +104,21 @@ void DataMemory::SetValue(string index, vector<bool> input)
 	dMemory[table[index]] = data;
 }
 
+void DataMemory::SetValue(int index, vector<bool> input)
+{
+	if(index < 0 || index > 31) throw "Endereço inválido de memória de dados.";
+	if(input.size() > 16) throw "A memória de dados guarda somente 16 bits por célula.";
+
+	vector<bool> data = input;
+	if(input.size() != 16) // Complementando o vector com 0's ate date ter 16 bits.
+	{
+		for(int i = input.size(); i < 16; i++)
+			data.push_back(false);
+	}
+	dMemory[index] = data;
+}
+
+// Função que retorna o valor de uma posição do data memory
 vector<bool> DataMemory::GetValue(string index)
 {
 	if(index.size() != 5) throw "Endereço inválido de memória de dados.";
@@ -82,3 +126,9 @@ vector<bool> DataMemory::GetValue(string index)
 	return dMemory[table[index]];
 }
 
+vector<bool> DataMemory::GetValue(int index)
+{
+	if(index < 0 || index > 31) throw "Endereço inválido de memória de dados.";
+	
+	return dMemory[index];
+}
