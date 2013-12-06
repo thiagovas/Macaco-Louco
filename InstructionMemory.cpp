@@ -159,9 +159,11 @@ vector<vector<bool> > InstructionMemory::get_instruction_formatted (int pos){
 
 	if (opcode_s[0] == '0'){
 		// Instruções do tipo R;
-		
-		test = get_bits (15, 17, pos/18);
-		
+		formatted_inst.resize (4);
+		formatted_inst[0] = get_bits (15, 17, pos/18);
+		formatted_inst[1] = get_bits (10, 14, pos/18);
+		formatted_inst[2] = get_bits (5, 9, pos/18);
+		formatted_inst[3] = get_bits (0, 4, pos/18);		
 	}
 	else if (opcode_s == "100"){
 		// LWI
