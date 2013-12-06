@@ -33,9 +33,8 @@ int main(int argc, char *argv[])
 	fstream fOutput;
 	InstructionMemory im;
 	DataMemory dm;
-	Register reg;
+	Register regs;
 	Control controle;
-    int instructionPos = 0;
 	Alu alu1,alu2;
 
 	fData.open(argv[1]);
@@ -44,12 +43,36 @@ int main(int argc, char *argv[])
 	
 	im.Init(fInstructions);
 	dm.Init(fData);
-	
-	while(instructionPos < im.GetNumInstructions())
-	{
-		
-	}
 
+	controle.SetStage(0);
+	while(true){
+		controle.do_your_job();
+		controle.go_my_children_i_free_you(alu1,alu2,im,dm/*todas estruturas*/);
+		alu1.faz_seu_trabalho(/*parametros*/);
+		alu2.faz_seu_trabalho(/*(estagio)(mux)(registradores)parametros*/);
+		im.faz_seu_trabalho(/*parametros(estagio)*/);
+
+		if(controle.GetStage == 0){
+
+		}else if(controle.GetStage == 1){
+
+		}else if(controle.GetStage == 2){
+
+		}else if(controle.GetStage == 3){
+
+		}else if(controle.GetStage == 4){
+
+		}else if(controle.GetStage == 5){
+
+		}else if(controle.GetStage == 6){
+
+		}else if(controle.GetStage == 7){
+
+		}
+	}
+	
+	
+	
 	/* Finalizando tudo. Fechando streams e limpando tudo. */
 	fData.close();
 	fInstructions.close();
