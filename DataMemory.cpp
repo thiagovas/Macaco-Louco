@@ -42,6 +42,18 @@ DataMemory::DataMemory()
 DataMemory::~DataMemory ()
 {
 	Clear();
+	this->MemRead1 = false;
+	this->MemRead2 = false;
+	this->MemWrite1 = false;
+	this->MemWrite2 = false;
+}
+
+void DataMemory::update_signal (bool MemRead1, bool MemRead2, bool MemWrite1, bool MemWrite2)
+{
+	this->MemRead1 = MemRead1;
+	this->MemRead2 = MemRead2;
+	this->MemWrite1 = MemWrite1;
+	this->MemWrite2 = MemWrite2;
 }
 
 // Imprime;
