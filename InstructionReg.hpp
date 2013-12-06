@@ -27,10 +27,18 @@ class InstReg
 		vector<bool> reg;
 		int size; //Numero de bits que um registrador guarda
 	public:
-		Register();
-		~Register();
-		void SetValue(string, vector<bool>);
-		vector<bool> GetValue(string);
+		InstReg();
+		~InstReg();
+		
+		void SetValue(vector<bool>);
+		vector<bool> get_opcode();
+		vector<bool> get_rs();
+		vector<bool> get_rs();
+		vector<bool> get_rt();
+		vector<bool> get_rd();
+		vector<bool> get_immed5();
+		vector<bool> get_immed10();
+		vector<bool> get_bits (int,int);
 };
 
 #endif

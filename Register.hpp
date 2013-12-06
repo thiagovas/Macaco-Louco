@@ -18,8 +18,14 @@ using namespace std;
 
 /* Classe registrador
 *	Ela possui uma matriz com sete linhas, ou seja, uma linha para cada registrador que existe em nosso datapath.
-	[0] = PC
-	[1] = 
+	PC = 0;
+	A" = 1;
+	B" = 2;
+	C" = 3; 
+	D" = 4;
+	ALUout1" = 5;
+	ALUout2" = 6;
+
 */
 class Register
 {

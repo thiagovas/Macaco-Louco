@@ -1,39 +1,53 @@
 #include "InstReg.hpp"
 
-InstReg::InstReg()
-{
-	size = 18; //Numero de bits que um registrador guarda
-	reg.resize(18,false);
+InstReg::InstReg(){
 
 }
 
-InstReg::~InstReg()
-{
-	reg.clear();
-	size = 0;
+InstReg::~InstReg(){
+
 }
 
-void InstReg::SetValue(vector<bool> value)
-{
-	std::stringstream message;
-	message << "Registradores guardam no máximo " << size << " bits.\n";
-	
-	if(index.size() != 3) throw "Endereço inválido de registrador.";
-	if(value.size() > size) throw message.str();
-	if(table.find(index) == table.end()) throw "Endereço inválido de registrador.";	
-	
-	vector<bool> data = value;
-	if(value.size() != size)
-	{
-		for(int i = value.size(); i < size; i++)
-			data.push_back(false);	
+void InstReg::SetValue(vector<bool> value){
+	reg = value;	
+}
+
+vector<bool> InstReg::get_opcode(){
+	return get_bits(15,17);
+}
+
+vector<bool> InstReg::get_rs(){
+	return get_bits(10,14);
+}
+
+vector<bool> InstReg::get_rs(){
+	return get_bits(10,14);
+}
+
+vector<bool> InstReg::get_rt(){
+	return get_bits(5,9);
+}
+
+vector<bool> InstReg::get_rd(){
+	return get_bits(0,4);
+}
+
+vector<bool> InstReg::get_immed5(){
+	return get_bits(0,4);
+}
+
+vector<bool> InstReg::get_immed10(){
+	return get_bits(0,9);
+}
+
+vector<bool> InstReg::get_bits (int lower, int upper){
+	if (lower < 0 || upper > 17) throw "Limites errados!\n";
+
+	vector<bool> bits (upper-lower+1, false);
+
+	for (int i = lower; i <= upper; i++){
+		if (reg[i]) bits[i-lower] = true;
 	}
-	reg[table[index]] = data;
-}
 
-vector<bool> InstReg::GetValue(string index)
-{
-	if(index.size() != 3) throw "Endereço inválido de registrador.";
-	
-	return reg[table[index]];
+	return bits;
 }

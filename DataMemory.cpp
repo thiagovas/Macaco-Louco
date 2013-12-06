@@ -72,7 +72,9 @@ void DataMemory::Init(ifstream &stream)
 	while(true)
 	{
 		stream >> input;
+
 		if(!stream) break;
+
 		i++;
 		if(input.size() == 0) continue;
 		

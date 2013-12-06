@@ -74,13 +74,6 @@ void Control::Fetch(){
 void Control::Decode(){
 	MemRead1 = true;
 	MemRead2 = true;
-
-	/*Control::DEFINE OPcode*/
-	/*
-	for(int i = 13 ; i < 16; i++){
-		OPcode[i-13] = instruction[i];
-	}
-	*/
 }
 
 void Control::Execute(){

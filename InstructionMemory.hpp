@@ -37,20 +37,12 @@ public:
 	void imprime ();
 	
 	/*
-	* Função: Seta o sinal do controle de leitura para "TRUE";
+	* Função: Seta o sinal do controle de leitura para "TRUE" ou "FALSE";
 	* Parâmetro(s): Nenhum;
 	* Return: Nenhum;
 	* Observações: As I said, o controle que se vire com esses sinais.
 	*/
-	void set_signal ();
-	
-	/*
-	* Função: Reseta o sinal do controle para ler uma instrução;
-	* Parâmetro(s): Nenhum;
-	* Return: Nenhum;
-	* Observações: Nenhum. O controle que se vira com esse monte de sinal.
-	*/
-	void reset_signal ();
+	void update_signal (bool signal);
 	
 	/*
 	* Função: Retorna uma instrução da memória;
@@ -58,7 +50,7 @@ public:
 	* Return: vector<bool> com 18 posições contendo a instrução;
 	* Observações: Se a posição for invalida ou se a posição a ser lida for maior que 32, um Warning é lançado na tela.
 	*/
-	vector<bool> get_instruction (int pos);
+	vector<bool> get_instruction (int PC);
 	
 	/*
 	* Função: Retorna o opcode formatado em uma string;
@@ -66,7 +58,7 @@ public:
 	* Return: Uma string contendo o opcode;
 	* Observações: O sinal de leitura enviado pelo controle deve está setado como TRUE!
 	*/
-	string get_opcode_formatted (int pos);
+	string get_opcode_formatted (int PC);
 
 	/*
 	* Função: Retorna os bits delimitados por[lower, upper] da posição indicada por "pos";
@@ -74,7 +66,7 @@ public:
 	* Return: Um vector<bool> contendo os bits;
 	* Observações: Nenhum;
 	*/
-	vector<bool> get_bits (int lower, int upper, int pos);
+	vector<bool> get_bits (int lower, int upper, int PC);
 
 	/*
 	* Função: Retorna a instrução formatada.
@@ -82,7 +74,7 @@ public:
 	* Return: Um vector<vector<bool>> contendo a instrução formatada;
 	* Observações: Nenhum;
 	*/
-	vector<vector<bool> > get_instruction_formatted (int pos);
+	vector<vector<bool> > get_instruction_formatted (int PC);
 	
 	/*
 	* Função: Retorna o opode da instrução;
@@ -90,7 +82,7 @@ public:
 	* Return: Vector<bool> contendo os três bits do opcode (saída está especificada no README.md);
 	* Observações: Se a posição lida não for uma posição valida, o programa lança um warning!
 	*/
-	vector<bool> get_opcode (int pos);
+	vector<bool> get_opcode (int PC);
 	
 	/* 
 	* Função: Inicializa a memória de instruções;
@@ -100,6 +92,22 @@ public:
 		* Se "inst_size" > 32, código lança um Warning e para de ler do arquivo;
 	*/
 	void Init (ifstream &input);
+
+	/* 
+	* Função: Retorna o número instruções lidas.
+	* Parâmetro(s): Nenhum
+	* Return: O número de instruções que estão em Instruction Memory.
+	* Observações: Nenhum
+	*/	
+	size_t GetNumInstructions();
+
+	/*
+	* Função: F
+	* Parâmetro(s): 
+	* Return: 
+	* Observações: 
+	*/
+	bool come_back_cracken (int PC);
 };
 
 /*
