@@ -23,6 +23,36 @@ string convert (int a){
 	return ss.str();
 }
 
+string int_to_bitstring (int label, int size){
+	
+	int x = 1 << size-1;
+	string binary;
+
+	while (x){
+		if (label&x) binary += '1';
+		else binary += '0';
+		x = x >> 1;
+	}
+
+	return binary;
+}
+
+string invert (string s){
+	string result;
+
+	for (int i=s.size()-1; i>=0; i--){
+		result += s[i];
+	}
+
+	return result;
+}
+
+void write_data (ofstream &data){
+	int a = rand()%65536;
+	// cout << a << endl;
+	data << invert (int_to_bitstring (a, 16)) << endl;
+}
+
 void r_type (ofstream &inst){
 	inst << "M" << convert (rand()%32) << ' ' << "M" << convert(rand()%32) << ' ' << "M" << convert(rand()%32) << endl;
 }
@@ -106,7 +136,11 @@ int main (int argc, char *argv[]){
 		instruction = type_inst[rand()%8];
 		inst << instruction << ' ';
 		convert_to_funct (inst, instruction, table);
-	}	
+	}
+
+	for (int i=0; i<quant_dados; i++){
+		write_data (data);
+	}
 
 	return 0;
 }
