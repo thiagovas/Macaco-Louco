@@ -31,7 +31,7 @@ class InstReg
 		InstReg();
 		~InstReg();
 		
-		void set_control(bool);
+		void update_sign(bool);
 		void SetValue(vector<bool>);
 		vector<bool> get_opcode();
 		vector<bool> get_rs();

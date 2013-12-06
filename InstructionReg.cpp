@@ -54,6 +54,6 @@ vector<bool> InstReg::get_bits (int lower, int upper){
 	return bits;
 }
 
-void InstReg::set_control(bool may_i){
+void InstReg::update_sign(bool may_i){
 	IRWrite = may_i;
 }
