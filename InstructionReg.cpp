@@ -22,10 +22,6 @@ vector<bool> InstReg::get_rs(){
 	return get_bits(10,14);
 }
 
-vector<bool> InstReg::get_rs(){
-	return get_bits(10,14);
-}
-
 vector<bool> InstReg::get_rt(){
 	return get_bits(5,9);
 }

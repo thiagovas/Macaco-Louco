@@ -35,7 +35,6 @@ class InstReg
 		void SetValue(vector<bool>);
 		vector<bool> get_opcode();
 		vector<bool> get_rs();
-		vector<bool> get_rs();
 		vector<bool> get_rt();
 		vector<bool> get_rd();
 		vector<bool> get_immed5();

@@ -19,6 +19,8 @@
 #include "DataMemory.hpp"
 #include "InstructionMemory.hpp"
 #include "Register.hpp"
+#include "InstructionReg.hpp"
+#include "Mux.hpp"
 using namespace std;
 
 class Control{
