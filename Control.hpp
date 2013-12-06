@@ -14,7 +14,7 @@
 #include <string>
 #include <cstring>
 #include <vector>
-#include <utitlity>
+#include <utility>
 #include "ALU.hpp"
 #include "DataMemory.hpp"
 #include "InstructionMemory.hpp"
@@ -28,7 +28,7 @@ private:
 	bool PCWriteCond,PCWrite,MemINSTRead,MemINSTWrite;
 	bool IRWrite,MemRead1,MemRead2,MemWrite1,MemWrite2;
 	bool MemDest,ALUSrcB,ALUSrcA;
-	pair<bool,bool> ALUop,AddresControl,PCSource;
+	pair<bool,bool> ALUOp,AddresControl,PCSource;
 	int Stage;
 	vector<bool> OPcode;
 
@@ -36,7 +36,7 @@ public:
 	Control();
 	~Control();
 
-	void setcicle(int);
+	void setstage(int);
 
 	/*EXECUTA O QUE PRECISAR DADO O CICLO*/
 	void do_your_job();
@@ -58,9 +58,9 @@ public:
 	/*CONCLUSÃO JUMPR*/
 	void conclui_jumpr();
 
-	int next_stage(OPcode,Ciclo);
+	int next_stage(vector<bool>,int);
 
-	void Control::go_my_children_i_libert_you(Alu &, Alu &, Alu &, InstructionMemory & , DataMemory & );
+	void go_my_children_i_libert_you(Alu &, Alu &, Alu &, InstructionMemory & , DataMemory & );
 
 };
 
