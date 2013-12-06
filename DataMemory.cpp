@@ -74,3 +74,11 @@ void DataMemory::SetValue(string index, vector<bool> input)
 	}
 	dMemory[table[index]] = data;
 }
+
+vector<bool> DataMemory::GetValue(string index)
+{
+	if(index.size() != 5) throw "Endereço inválido de memória de dados.";
+	
+	return dmemory[table[index]];
+}
+
