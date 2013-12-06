@@ -17,7 +17,8 @@
 #include "Control.hpp"
 #include "ALU.hpp"
 #include "Register.hpp"
-#include "InstReg"
+#include "InstructionReg.hpp"
+#include "Mux.hpp"
 #include <fstream>
 using namespace std;
 
