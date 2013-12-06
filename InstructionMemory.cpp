@@ -339,7 +339,7 @@ string invert (string s){
 	return result;
 }
 
-size_t GetNumInstructions()
+size_t InstructionMemory::GetNumInstructions()
 {
 	return this->inst_size;
 }
