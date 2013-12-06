@@ -172,10 +172,15 @@ void Control::next_stage(){
 	}
 }
 
-void Control::go_my_children_i_free_you(Alu &alu1, Alu &alu2, InstructionMemory &im , DataMemory &dm   ){
+void Control::go_my_children_i_free_you(Alu &alu1, Alu &alu2, InstructionMemory &im , DataMemory &dm  , Register &regs, InstReg &ir){
 	alu1.ALUop_update(ALUOp.second,ALUOp.first);
 	alu2.ALUop_update(ALUOp.second,ALUOp.first);
 	im.update_signal(MemINSTWrite);
+	dm.update_signal(MemRead1,MemRead2,MemWrite1,MemWrite2);
+	regs.
+	ir.
+	
+
 }
 
 

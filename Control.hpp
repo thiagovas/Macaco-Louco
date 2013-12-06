@@ -60,7 +60,7 @@ class Control{
 	
 		void next_stage();
 
-		void go_my_children_i_free_you(Alu &, Alu &, InstructionMemory & , DataMemory & );	
+		void Control::go_my_children_i_free_you(Alu &, Alu &, InstructionMemory &, DataMemory &, Register & , InstReg &);
 
 		void print();
 };
