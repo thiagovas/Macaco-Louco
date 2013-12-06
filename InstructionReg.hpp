@@ -1,5 +1,5 @@
-#ifndef _Register_hpp
-#define _Register_hpp
+#ifndef _InstructionReg_hpp
+#define _InstructionReg_hpp
 
 
 #include <iostream>
@@ -21,11 +21,10 @@ using namespace std;
 	[0] = PC
 	[1] = 
 */
-class Register
+class InstReg
 {
 	private:
-		vector<vector<bool> > reg;
-		map<string, int> table;
+		vector<bool> reg;
 		int size; //Numero de bits que um registrador guarda
 	public:
 		Register();
