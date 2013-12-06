@@ -4,6 +4,7 @@ Register::Register()
 {
 	this->size = 16; //Numero de bits que um registrador guarda
 	reg.resize(7, vector<bool>(size, false));
+	reg[0].resize (18, false);
 	table["PC"] = 0;
 	table["A"] = 1;
 	table["B"] = 2;

@@ -1,4 +1,4 @@
-all: main
+all: main cleanafter
 
 main: main.cpp ALU.o DataMemory.o InstructionMemory.o Register.o Control.o
 	g++ main.cpp ALU.o DataMemory.o InstructionMemory.o Register.o Control.o -o main
