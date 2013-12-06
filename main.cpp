@@ -52,8 +52,25 @@ int main(int argc, char *argv[])
 	while(true){
 		controle.do_your_job();
 		controle.go_my_children_i_free_you(alu1,alu2,im,dm,regs,ir,muxpcsource,muxmemdest,muxaddrescontrol,muxalusrca,muxalusrcb);
-		
-	}	
+
+		/*PEGA INSTRUÇÃO NA MEMÓRIA E PASSADO PARA O REGISTRADOR DE INSTRUÇÕES*/
+		ir.SetValue( im.get_instruction( regs.GetValue(string) ) );
+
+		/*INICIALIZA AS ALUs  E FAZ SUAS OPERAÇÕES*/
+		alu1.set_values(ir.get_rs(),ir.get_rt());
+		// alu2.set_values(ir.get_rs(),ir.get_rt());
+		alu1.do_operation();
+		// alu2.do_operation();
+
+
+		muxpcsource.SetInput(alu1.result_value(),ir.get_immed5(),);
+		regs.SetValue("PC",)
+
+
+
+	}
+	
+	
 	
 	/* Finalizando tudo. Fechando streams e limpando tudo. */
 	fData.close();

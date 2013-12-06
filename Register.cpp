@@ -30,14 +30,15 @@ void Register::SetValue(string index, vector<bool> value)
 	if(value.size() > this->size) throw message.str();
 	if(table.find(index) == table.end()) throw "Endereço inválido de registrador.";	
 	
-	int limite = this->size;
+	int tam;
 	if(index == "PC")
-		limite = 18;
-	
+		tam = 18;
+	else
+		tam = this->size;
 	vector<bool> data = value;
-	if(value.size() != limite)
+	if(value.size() != tam)
 	{
-		for(int i = value.size(); i < limite; i++)
+		for(int i = value.size(); i < tam; i++)
 			data.push_back(false);	
 	}
 	reg[table[index]] = data;
