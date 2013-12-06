@@ -79,6 +79,6 @@ vector<bool> DataMemory::GetValue(string index)
 {
 	if(index.size() != 5) throw "Endereço inválido de memória de dados.";
 	
-	return dmemory[table[index]];
+	return dMemory[table[index]];
 }
 
