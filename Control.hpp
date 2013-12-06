@@ -27,8 +27,8 @@ class Control{
 private:
 	bool PCWriteCond,PCWrite,MemINSTRead,MemINSTWrite;
 	bool IRWrite,MemRead1,MemRead2,MemWrite1,MemWrite2;
-	bool MemDest,ALUSrcB,ALUSrcA;
-	pair<bool,bool> ALUOp,AddresControl,PCSource;
+	bool ALUSrcB,ALUSrcA;
+	pair<bool,bool> ALUOp,AddressControl,PCSource,MemDest;
 	int Stage;
 	vector<bool> OPcode;
 
@@ -60,7 +60,7 @@ public:
 
 	int next_stage(vector<bool>,int);
 
-	void go_my_children_i_libert_you(Alu &, Alu &, Alu &, InstructionMemory & , DataMemory & );
+	void go_my_children_i_libert_you(Alu &, Alu &, InstructionMemory & , DataMemory & );
 
 };
 
