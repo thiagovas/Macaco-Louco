@@ -25,7 +25,7 @@ void Register::SetValue(string index, vector<bool> value)
 	std::stringstream message;
 	message << "Registradores guardam no máximo " << this->size << " bits.\n";
 	
-	if(!this->controlSign) throw "O Controle emite um sinal que não permite escrita neste registrador.";
+	if(!this->controlSign && index == "PC") throw "O Controle emite um sinal que não permite escrita neste registrador.";
 	if(index.size() != 3) throw "Endereço inválido de registrador.";
 	if(value.size() > this->size) throw message.str();
 	if(table.find(index) == table.end()) throw "Endereço inválido de registrador.";	
