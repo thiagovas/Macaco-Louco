@@ -8,20 +8,20 @@ Mux::Mux()
 
 Mux::~Mux()
 {
-	this->input.clear();	
+	this->input.clear();
 }
 
-void SetControlSign(pair<bool, bool> sign)
+void Mux::SetControlSign(pair<bool, bool> sign)
 {
 	this->controlSign = sign;
 }
 
-pair<bool, bool> GetControlSign()
+pair<bool, bool> Mux::GetControlSign()
 {
 	return this->controlSign;
 }
 
-void SetInput(vector<bool> first, vector<bool> second, vector<bool> third, vector<bool> fourth)
+void Mux::SetInput(vector<bool> first, vector<bool> second, vector<bool> third, vector<bool> fourth)
 {
 	this->input[0] = first;
 	this->input[1] = second;
@@ -29,7 +29,7 @@ void SetInput(vector<bool> first, vector<bool> second, vector<bool> third, vecto
 	this->input[3] = fourth;
 }
 
-vector<bool> GetOutput()
+vector<bool> Mux::GetOutput()
 {
 	if(!this->controlSign.first && !this->controlSign.second) // Mux vai retornar a posição 00
 		return this->input[0];
