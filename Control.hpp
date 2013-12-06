@@ -34,17 +34,19 @@ class Control{
 		Control();
 		~Control();
 
-		void setstage(int);
-
+		void SetStage(int);
+		int GetStage();
+		void SetOPcode(vector<bool>);
+		
 		/*EXECUTA O QUE PRECISAR DADO O CICLO*/
 		void do_your_job();
 
 		/*FETCH*/
-		void fetch();
+		void Fetch();
 		/*BUSCA REGISTRADORES*/
-		void busca_reg(vector<bool>);
+		void Decode();
 		/*EXECUÇÃO*/
-		void executa();
+		void Execute();
 		/*CONCLUSÃO DE TIPO R*/
 		void conclui_r();
 		/*TÉRMINO DO LOAD IMMEDIATE*/
