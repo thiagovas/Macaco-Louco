@@ -80,6 +80,19 @@ vector<bool> InstructionMemory::get_instruction (int pos){
 	return iMemory[pos/18];
 }
 
+vector<bool> InstructionMemory::get_opcode (int pos){
+
+	if (pos % 18 != 0) cout << "I already told you Dave, I can't do that!!!\n";
+	
+	vector<bool> opcode (3, false);
+
+	for (int i=15; i<18; i++){
+		opcode = iMemory[pos/18][i];
+	}
+
+	return opcode;
+}
+
 void InstructionMemory::init (ifstream &input){
 
 	if (!input.is_open ()){

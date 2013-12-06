@@ -22,6 +22,7 @@ public:
 
 	void init (ifstream &input);
 	vector<bool> get_instruction (int pos);
+	vector<bool> get_opcode (int pos);
 	void imprime ();
 };
 
