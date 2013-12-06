@@ -16,14 +16,17 @@ class InstructionMemory {
 private:
 	vector<vector<bool> > iMemory;
 	map<string, string> table;
+	bool MemINSTRead;
 public:
 	InstructionMemory ();
 	~InstructionMemory ();
 
-	void init (ifstream &input);
+	void imprime ();
+	void set_signal (bool signal);
+	void reset_signal ();
 	vector<bool> get_instruction (int pos);
 	vector<bool> get_opcode (int pos);
-	void imprime ();
+	void init (ifstream &input);
 };
 
 string int_to_bitstring (int label, int size);

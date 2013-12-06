@@ -53,7 +53,7 @@ InstructionMemory::InstructionMemory (){
 	table["M30"] = "11110";
 	table["M31"] = "11111";
 
-	string aux;
+	MemINSTRead = false;
 }
 
 // Destrutor;
@@ -73,6 +73,15 @@ void InstructionMemory::imprime (){
 	cout << endl;
 }
 
+void InstructionMemory::set_signal (bool signal){
+	MemINSTRead = signal;
+}
+
+void InstructionMemory::reset_signal (){
+	MemINSTRead = false;
+}
+
+
 vector<bool> InstructionMemory::get_instruction (int pos){
 
 	if (pos % 18 != 0) cout << "I'm sorry Dave, I'm afraid I can't do that\n";
@@ -87,7 +96,8 @@ vector<bool> InstructionMemory::get_opcode (int pos){
 	vector<bool> opcode (3, false);
 
 	for (int i=15; i<18; i++){
-		opcode = iMemory[pos/18][i];
+		if (iMemory[pos/18][i]) opcode[i-15] = true;
+		else opcode[i-15] = false;
 	}
 
 	return opcode;
