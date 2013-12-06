@@ -43,7 +43,9 @@ int main(int argc, char *argv[])
 	
 	im.init(fInstructions);
 	dm.Init(fData);
-
+	
+	
+	
 	/* Finalizando tudo. Fechando streams e limpando tudo. */
 	fData.close();
 	fInstructions.close();
