@@ -6,15 +6,15 @@ Memória de dados = Matriz de 32 linhas e 16 colunas.
 Memória de instruções = Matriz de 32 linhas e 18 colunas.
 
 TABELA DE OPCODE:
-
-ADD  - 	000
-SUB  - 	001
-AND  -	010
-OR   - 	011
-LWI  - 	100
-BNE  -	101
-J    - 	110
-JR   - 	111
+	   [2] [1] [0]
+ADD  - 	0 	0 	0
+SUB  - 	0   0   1
+AND  -	0   1   0
+OR   - 	0   1   1
+LWI  - 	1   0   0
+BNE  -	1   0   1
+J    - 	1   1   0
+JR   - 	1   1   1
 
 FORMATO DAS INSTRUÇÕES;
 
