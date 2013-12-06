@@ -61,8 +61,9 @@ class Control{
 		void conclui_jumpr();
 	
 		void next_stage();
-
-		void go_my_children_i_free_you(Alu &, Alu &, InstructionMemory & , DataMemory &  , Register &, InstReg & , Mux &, Mux & , Mux & , Mux & , Mux & );
+		
+		// 
+		void go_my_children_i_free_you(Alu&, Alu&, InstructionMemory&, DataMemory&, Register&, InstReg& , Mux&, Mux&, Mux&, Mux&, Mux&);
 
 		void print();
 };
