@@ -107,12 +107,18 @@ void InstructionMemory::update_signal (bool signal){
 * Return: vector<bool> com 18 posiçãoições contendo a instrução;
 * Observações: Se a posição for invalida ou se a posição a ser lida for maior que 32, um Warning é lançado na tela.
 */
-vector<bool> InstructionMemory::get_instruction (int PC){
+vector<bool> InstructionMemory::get_instruction (vector<bool> PC){
 
-	if (PC % 18 != 0) throw "I'm sorry Dave, I'm afraid I can't do that\n";
-	if (PC / 18 > inst_size) throw "Are you stupid?\n";
+	int pos = 0;
 
-	return iMemory[PC/18];
+	for (int i = 0; i < PC.size(); i++){
+		// pos += PC[i]*pow(2, i);
+	}
+
+	if (pos % 18 != 0) throw "I'm sorry Dave, I'm afraid I can't do that\n";
+	if (pos / 18 > inst_size) throw "Are you stupid?\n";
+
+	return iMemory[pos/18];
 }
 
 /*

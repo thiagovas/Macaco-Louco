@@ -14,6 +14,7 @@
 #include <sstream>
 #include <fstream>
 #include <bitset>
+#include <cmath>
 
 using namespace std;
 
@@ -50,7 +51,7 @@ public:
 	* Return: vector<bool> com 18 posições contendo a instrução;
 	* Observações: Se a posição for invalida ou se a posição a ser lida for maior que 32, um Warning é lançado na tela.
 	*/
-	vector<bool> get_instruction (int PC);
+	vector<bool> get_instruction (vector<bool> PC);
 	
 	/*
 	* Função: Retorna o opcode formatado em uma string;
