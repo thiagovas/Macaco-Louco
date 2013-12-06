@@ -60,7 +60,9 @@ class Control{
 	
 		void next_stage();
 
-		void go_my_child_i_free_you(Alu &, Alu &, InstructionMemory & , DataMemory & );	
+		void go_my_children_i_free_you(Alu &, Alu &, InstructionMemory & , DataMemory & );	
+
+		void print();
 };
 
 #endif
