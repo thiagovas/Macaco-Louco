@@ -24,46 +24,43 @@ using namespace std;
 
 
 class Control{
-private:
-	bool PCWriteCond,PCWrite,MemINSTRead,MemINSTWrite;
-	bool IRWrite,MemRead1,MemRead2,MemWrite1,MemWrite2;
-	bool ALUSrcB,ALUSrcA;
-	pair<bool,bool> ALUOp,AddressControl,PCSource,MemDest;
-	int Stage;
-	vector<bool> OPcode;
+	private:
+		bool PCWriteCond,PCWrite,MemINSTRead,MemINSTWrite;
+		bool IRWrite,MemRead1,MemRead2,MemWrite1,MemWrite2;
+		bool ALUSrcB,ALUSrcA;
+		pair<bool,bool> ALUOp,AddressControl,PCSource,MemDest;
+		int Stage;
+		vector<bool> OPcode;
 
-public:
-	Control();
-	~Control();
+	public:
+		Control();
+		~Control();
 
-	void setstage(int);
+		void setstage(int);
 
-	/*EXECUTA O QUE PRECISAR DADO O CICLO*/
-	void do_your_job();
+		/*EXECUTA O QUE PRECISAR DADO O CICLO*/
+		void do_your_job();
 
-	/*FETCH*/
-	void fetch();
-	/*BUSCA REGISTRADORES*/
-	void busca_reg(vector<bool>);
-	/*EXECUÇÃO*/
-	void executa();
-	/*CONCLUSÃO DE TIPO R*/
-	void conclui_r();
-	/*TÉRMINO DO LOAD IMMEDIATE*/
-	void conclui_loadi();
-	/*VERIFICA BRANCH*/
-	void branch();
-	/*CONCLUSÃO JUMP*/
-	void conclui_jump();
-	/*CONCLUSÃO JUMPR*/
-	void conclui_jumpr();
+		/*FETCH*/
+		void fetch();
+		/*BUSCA REGISTRADORES*/
+		void busca_reg(vector<bool>);
+		/*EXECUÇÃO*/
+		void executa();
+		/*CONCLUSÃO DE TIPO R*/
+		void conclui_r();
+		/*TÉRMINO DO LOAD IMMEDIATE*/
+		void conclui_loadi();
+		/*VERIFICA BRANCH*/
+		void branch();
+		/*CONCLUSÃO JUMP*/
+		void conclui_jump();
+		/*CONCLUSÃO JUMPR*/
+		void conclui_jumpr();
+	
+		void next_stage();
 
-	int next_stage(vector<bool>,int);
-
-	void go_my_children_i_libert_you(Alu &, Alu &, InstructionMemory & , DataMemory & );
-
+		void go_my_child_i_free_you(Alu &, Alu &, InstructionMemory & , DataMemory & );	
 };
-
-
-
+	
 #endif
