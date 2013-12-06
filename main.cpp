@@ -17,6 +17,7 @@
 #include "Control.hpp"
 #include "ALU.hpp"
 #include "Register.hpp"
+#include "InstReg"
 #include <fstream>
 using namespace std;
 
@@ -36,6 +37,8 @@ int main(int argc, char *argv[])
 	Register regs;
 	Control controle;
 	Alu alu1,alu2;
+	InstReg ir;
+	Mux muxpcsource,muxmemdest,muxaddrescontrol,muxalusrca,muxalusrcb;
 
 	fData.open(argv[1]);
 	fInstructions.open(argv[2]);
@@ -47,26 +50,23 @@ int main(int argc, char *argv[])
 	controle.SetStage(0);
 	while(true){
 		controle.do_your_job();
-		controle.go_my_children_i_free_you(alu1,alu2,im,dm/*todas estruturas*/);
-		alu1.faz_seu_trabalho(/*parametros*/);
-		alu2.faz_seu_trabalho(/*(estagio)(mux)(registradores)parametros*/);
-		im.faz_seu_trabalho(/*parametros(estagio)*/);
+		controle.go_my_children_i_free_you(alu1,alu2,im,dm,regs,ir,muxpcsource,muxmemdest,muxaddrescontrol,muxalusrca,muxalusrcb);
 
-		if(controle.GetStage == 0){
+		if(controle.GetStage() == 0){
 
-		}else if(controle.GetStage == 1){
+		}else if(controle.GetStage() == 1){
 
-		}else if(controle.GetStage == 2){
+		}else if(controle.GetStage() == 2){
 
-		}else if(controle.GetStage == 3){
+		}else if(controle.GetStage() == 3){
 
-		}else if(controle.GetStage == 4){
+		}else if(controle.GetStage() == 4){
 
-		}else if(controle.GetStage == 5){
+		}else if(controle.GetStage() == 5){
 
-		}else if(controle.GetStage == 6){
+		}else if(controle.GetStage() == 6){
 
-		}else if(controle.GetStage == 7){
+		}else if(controle.GetStage() == 7){
 
 		}
 	}
