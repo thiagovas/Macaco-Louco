@@ -93,7 +93,6 @@ public:
 	*/
 	void Init (ifstream &input);
 
-<<<<<<< HEAD
 	/* 
 	* Função: Retorna o número instruções lidas.
 	* Parâmetro(s): Nenhum
@@ -101,7 +100,7 @@ public:
 	* Observações: Nenhum
 	*/	
 	size_t GetNumInstructions();
-=======
+
 	/*
 	* Função: F
 	* Parâmetro(s): 
@@ -109,7 +108,6 @@ public:
 	* Observações: 
 	*/
 	bool come_back_cracken (int PC);
->>>>>>> 4797f4cd0417023e9c8721fa5e6077bd3451fcd4
 };
 
 /*
