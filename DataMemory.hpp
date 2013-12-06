@@ -18,11 +18,13 @@ class DataMemory {
 	private:
 		vector<vector<bool> > dMemory;
 		map<string, int> table;
+		bool MemRead1, MemRead2, MemWrite1, MemWrite2;
 	public:
 		DataMemory();
 		~DataMemory();
 
 		// Imprime toda a memória de instruções;
+		void update_signal (bool MemRead1, bool MemRead2, bool MemWrite1, bool MemWrite2);
 		void Print();
 		void Init(ifstream&);
 		void SetValue(string, vector<bool>);
