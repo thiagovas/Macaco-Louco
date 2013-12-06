@@ -84,7 +84,7 @@ void DataMemory::Init(ifstream &stream)
 	while(true)
 	{
 		//stream >> input;
-		getline(stream, input)
+		getline(stream, input);
 		if(not stream) break;
 
 		i++;

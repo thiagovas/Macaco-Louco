@@ -14,7 +14,6 @@
 #include <string>
 #include <cstring>
 #include <vector>
-
 using namespace std;
 
 // ALUop :	ADD  - 	000(0)
@@ -24,52 +23,46 @@ using namespace std;
 
 
 class Alu{
+	private:
+		int ALUop;
+		bool zero,overflow;
+		vector<bool> a;
+		vector<bool> b;
+		vector<bool> result;
 
-private:
-int ALUop;
-bool zero,overflow;
-vector<bool> a;
-vector<bool> b;
-vector<bool> result;
-
-
-public:
+	public:
+		// RECEBE VALORES DE A, B e OP
+		void setvalues(vector<bool>,vector<bool>,bool,bool);
 	
-	// RECEBE VALORES DE A, B e OP
-	void setvalues(vector<bool>,vector<bool>,bool,bool);
-
-	// FAZ A OPERAÇÃO E RETORNA O RESULTADO
-	void do_operation();
-
-	// Soma bit a bit
-	void sum();
-
-	// Subtração bit a bit
-	bool sub();
-
-	// And bit a bit
-	void alu_and();
-
-	// Or bit a bit
-	void alu_or();
-
-	// RETORNA O RESULTADO
-	vector<bool> result_value();
-
-	// VERIFICA SE A 
-	bool zero_value();
-
-	//IMPRIME NUMERO
-	void print();
-
-	// VERIFICA SE O POSSÍVEL RESULTADO É NEGATIVO
-	bool result_is_negative();
-
-	// ATUALIZA ALUop
-	void ALUop_update(bool first_bit, bool second_bit);
+		// FAZ A OPERAÇÃO E RETORNA O RESULTADO
+		void do_operation();
+	
+		// Soma bit a bit
+		void sum();
+	
+		// Subtração bit a bit
+		bool sub();
+	
+		// And bit a bit
+		void alu_and();
+	
+		// Or bit a bit
+		void alu_or();
+	
+		// RETORNA O RESULTADO
+		vector<bool> result_value();
+	
+		// VERIFICA SE A 
+		bool zero_value();
+	
+		//IMPRIME NUMERO
+		void print();
+	
+		// VERIFICA SE O POSSÍVEL RESULTADO É NEGATIVO
+		bool result_is_negative();
+	
+		// ATUALIZA ALUop
+		void ALUop_update(bool first_bit, bool second_bit);
 };
-
-
-
 
 #endif
