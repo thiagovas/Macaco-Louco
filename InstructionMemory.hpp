@@ -37,20 +37,12 @@ public:
 	void imprime ();
 	
 	/*
-	* Função: Seta o sinal do controle de leitura para "TRUE";
+	* Função: Seta o sinal do controle de leitura para "TRUE" ou "FALSE";
 	* Parâmetro(s): Nenhum;
 	* Return: Nenhum;
 	* Observações: As I said, o controle que se vire com esses sinais.
 	*/
-	void set_signal ();
-	
-	/*
-	* Função: Reseta o sinal do controle para ler uma instrução;
-	* Parâmetro(s): Nenhum;
-	* Return: Nenhum;
-	* Observações: Nenhum. O controle que se vira com esse monte de sinal.
-	*/
-	void reset_signal ();
+	void update_signal (bool signal);
 	
 	/*
 	* Função: Retorna uma instrução da memória;
@@ -102,10 +94,10 @@ public:
 	void Init (ifstream &input);
 
 	/*
-	*
-	*
-	*
-	*
+	* Função: F
+	* Parâmetro(s): 
+	* Return: 
+	* Observações: 
 	*/
 	bool come_back_cracken (int PC);
 };

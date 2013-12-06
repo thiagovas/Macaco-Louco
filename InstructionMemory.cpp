@@ -91,29 +91,20 @@ void InstructionMemory::imprime (){
 }
 
 /*
-* Função: Seta o sinal do controle de leitura para "TRUE";
+* Função: Seta o sinal do controle de leitura para "TRUE" ou "FALSE";
 * Parâmetro(s): Nenhum;
 * Return: Nenhum;
 * Observações: As I said, o controle que se vire com esses sinais.
 */
-void InstructionMemory::set_signal (){
-	MemINSTRead = true;
+void InstructionMemory::update_signal (bool signal){
+	MemINSTRead = signal;
 }
 
-/*
-* Função: Reseta o sinal do controle para ler uma instrução;
-* Parâmetro(s): Nenhum;
-* Return: Nenhum;
-* Observações: Nenhum. O controle que se vira com esse monte de sinal.
-*/
-void InstructionMemory::reset_signal (){
-	MemINSTRead = false;
-}
 
 /*
 * Função: Retorna uma instrução da memória;
 * Parâmetro(s): Inteiro informando a posição;
-* Return: vector<bool> com 18 posições contendo a instrução;
+* Return: vector<bool> com 18 posiçãoições contendo a instrução;
 * Observações: Se a posição for invalida ou se a posição a ser lida for maior que 32, um Warning é lançado na tela.
 */
 vector<bool> InstructionMemory::get_instruction (int PC){
