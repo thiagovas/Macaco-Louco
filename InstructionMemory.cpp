@@ -119,9 +119,68 @@ void InstructionMemory::reset_signal (){
 vector<bool> InstructionMemory::get_instruction (int pos){
 
 	if (pos % 18 != 0) cout << "I'm sorry Dave, I'm afraid I can't do that\n";
-	if (pos % 18 > inst_size) cout << "Are you stupid?\n";
+	if (pos / 18 > inst_size) cout << "Are you stupid?\n";
 
 	return iMemory[pos/18];
+}
+
+string InstructionMemory::get_opcode_formatted (int pos){
+	if (pos % 18 != 0) cout << "Posição invalida\n";
+	if (pos / 18 > inst_size) cout << "Não existe instrução nessa posição!\n";
+
+	string opcode_s;
+	vector<bool> opcode = get_opcode (pos);
+
+	for (int i = 0; i < opcode.size(); i++){
+		if (opcode[i]) opcode_s += '1';
+		else opcode_s += '0';
+	}
+
+	return invert(opcode_s);
+}
+
+vector<bool> InstructionMemory::get_bits (int lower, int upper, int pos){
+	if (lower < 0 || upper > 18) cout << "Limites errados!\n";
+
+	vector<bool> bits (upper-lower+1, false);
+
+	for (int i = lower; i <= upper; i++){
+		if (iMemory[pos][i]) bits[i-lower] = true;
+	}
+
+	return bits;
+}
+
+vector<vector<bool> > InstructionMemory::get_instruction_formatted (int pos){
+
+	string opcode_s = get_opcode_formatted (pos);
+	vector<vector<bool> > formatted_inst;
+	vector<bool> test;
+
+	if (opcode_s[0] == '0'){
+		// Instruções do tipo R;
+		
+		test = get_bits (15, 17, pos/18);
+		
+	}
+	else if (opcode_s == "100"){
+		// LWI
+
+	}
+	else if (opcode_s == "101"){
+		// BNE
+	
+	}
+	else if (opcode_s == "110"){
+		// J
+
+	}
+	else {
+		// JR
+
+	}
+
+	return formatted_inst;
 }
 
 /*
@@ -130,11 +189,10 @@ vector<bool> InstructionMemory::get_instruction (int pos){
 * Return: Vector<bool> contendo os três bits do opcode (saída está especificada no README.md);
 * Observações: Se a posição lida não for uma posição valida, o programa lança um warning!
 */
-
 vector<bool> InstructionMemory::get_opcode (int pos){
 
 	if (pos % 18 != 0) cout << "I already told you Dave, I can't do that!!!\n";
-	if (pos % 18 > inst_size) cout << "I give up!\n";
+	if (pos / 18 > inst_size) cout << "I give up!\n";
 
 	vector<bool> opcode (3, false);
 
@@ -181,7 +239,7 @@ void InstructionMemory::init (ifstream &input){
 		}
 		else if (op == "BNE"){
 			input >> reg1 >> reg2 >> label;
-			binary += invert(int_to_bitstring (label, 10)) + invert(table[reg2]) + invert(table[reg1]) + invert(table[op]);
+			binary += invert(int_to_bitstring (label, 5)) + invert(table[reg2]) + invert(table[reg1]) + invert(table[op]);
 		}
 		else if (op == "J"){
 			input >> label;
@@ -202,7 +260,7 @@ void InstructionMemory::init (ifstream &input){
 		inst_size++;
 
 		if (inst_size > 32){
-			cout << "Por algum motivo obscuro a memoria esta cheia, ajuste esse caso de teste!\n";
+			cout << "I think we gonna need a bigger memory!\n";
 			return;
 		}
 	}

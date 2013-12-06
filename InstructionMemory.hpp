@@ -31,6 +31,9 @@ public:
 	void imprime ();
 	void set_signal ();
 	void reset_signal ();
+	string get_opcode_formatted (int pos);
+	vector<bool> get_bits (int lower, int upper, int pos);
+	vector<vector<bool> > get_instruction_formatted (int pos);
 	vector<bool> get_instruction (int pos);
 	vector<bool> get_opcode (int pos);
 	void init (ifstream &input);
