@@ -245,7 +245,7 @@ vector<bool> InstructionMemory::get_opcode (int pos){
 * Observações: Mantém na variavel "inst_size" a quantidade de instruções lidas
 	* Se "inst_size" > 32, código lança um Warning e para de ler do arquivo;
 */
-void InstructionMemory::init (ifstream &input){
+void InstructionMemory::Init (ifstream &input){
 
 	if (!input.is_open ()){
 		throw "Oh crap!\n";

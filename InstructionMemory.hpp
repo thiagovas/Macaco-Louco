@@ -99,7 +99,7 @@ public:
 	* Observações: Mantém na variavel "inst_size" a quantidade de instruções lidas
 		* Se "inst_size" > 32, código lança um Warning e para de ler do arquivo;
 	*/
-	void init (ifstream &input);
+	void Init (ifstream &input);
 };
 
 /*

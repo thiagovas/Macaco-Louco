@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 	fInstructions.open(argv[2]);
 	fOutput.open(argv[3], std::fstream::out);
 	
-	im.init(fInstructions);
+	im.Init(fInstructions);
 	dm.Init(fData);
 	
 	
