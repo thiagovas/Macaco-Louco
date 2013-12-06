@@ -100,6 +100,14 @@ public:
 		* Se "inst_size" > 32, código lança um Warning e para de ler do arquivo;
 	*/
 	void Init (ifstream &input);
+
+	/* 
+	* Função: Retorna o número instruções lidas.
+	* Parâmetro(s): Nenhum
+	* Return: O número de instruções que estão em Instruction Memory.
+	* Observações: Nenhum
+	*/	
+	size_t GetNumInstructions();
 };
 
 /*

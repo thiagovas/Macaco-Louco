@@ -128,7 +128,7 @@ vector<bool> InstructionMemory::get_instruction (int pos){
 * Função: Retorna o opcode formatado em uma string;
 * Parâmetros(s): Posição da memória de instruções;
 * Return: Uma string contendo o opcode;
-* Observações: O sinal de leitura enviado pelo controle deve está setado como TRUE!
+* Observações: O sinal de leitura enviado pelo controle deve estar setado como TRUE!
 */
 string InstructionMemory::get_opcode_formatted (int pos){
 	if (pos % 18 != 0) throw "Posição invalida\n";
@@ -171,7 +171,7 @@ vector<bool> InstructionMemory::get_bits (int lower, int upper, int pos){
 */
 vector<vector<bool> > InstructionMemory::get_instruction_formatted (int pos){
 
-	if (!MemINSTRead) throw "Você se esqueceu de mandar o sinal para leitura no InstructionMemory!\n";
+	if (!MemINSTRead) throw "Você esqueceu de mandar o sinal para leitura no InstructionMemory!\n";
 
 	string opcode_s = get_opcode_formatted (pos);
 	vector<vector<bool> > formatted_inst;
@@ -339,4 +339,9 @@ string invert (string s){
 	}
 
 	return result;
+}
+
+size_t GetNumInstructions()
+{
+	return this->inst_size;
 }

@@ -35,6 +35,7 @@ int main(int argc, char *argv[])
 	DataMemory dm;
 	Register reg;
 	Control controle;
+    int instructionPos = 0;
 
 	fData.open(argv[1]);
 	fInstructions.open(argv[2]);
@@ -43,8 +44,11 @@ int main(int argc, char *argv[])
 	im.Init(fInstructions);
 	dm.Init(fData);
 	
-	
-	
+	while(instructionPos < im.GetNumInstructions())
+	{
+		
+	}
+
 	/* Finalizando tudo. Fechando streams e limpando tudo. */
 	fData.close();
 	fInstructions.close();
