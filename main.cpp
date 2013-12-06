@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 	ios::sync_with_stdio(false);
 	if(argc != 4)
 	{
-		cout << "Siga o padrão: ./<exec> <Arquivo com dados> <Arquivo com instruções> <Arquivo de saida>";
+		cout << "Siga o padrão: ./<exec> <Arquivo com dados> <Arquivo com instruções> <Arquivo de saida>" << endl;
 		return 1;
 	}
 	
