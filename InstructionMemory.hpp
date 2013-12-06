@@ -1,3 +1,9 @@
+/*
+	Author: Guilherme Vieira Leobas
+	Version: 1.0b
+*/
+
+
 #ifndef InstructionMemory_hpp
 #define InstructionMemory_hpp
 
@@ -17,12 +23,13 @@ private:
 	vector<vector<bool> > iMemory;
 	map<string, string> table;
 	bool MemINSTRead;
+	size_t inst_size;
 public:
 	InstructionMemory ();
 	~InstructionMemory ();
 
 	void imprime ();
-	void set_signal (bool signal);
+	void set_signal ();
 	void reset_signal ();
 	vector<bool> get_instruction (int pos);
 	vector<bool> get_opcode (int pos);
