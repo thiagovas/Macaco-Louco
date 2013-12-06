@@ -5,7 +5,7 @@
 #include "Control.hpp"
 
 // Control Logic
-void Control::Control(){
+Control::Control(){
 	PCWriteCond = false;
 	PCWrite = false;
 	MemINSTRead = false;
@@ -15,20 +15,19 @@ void Control::Control(){
 	MemRead2 = false;
 	MemWrite1 = false;
 	MemWrite2 = false;
-	PCSource = false;
+	PCSource = make_pair(false,false);
 	MemDest = false;
-	AddresControl = false;
-	ALUOp = false;
+	AddresControl = make_pair(false,false);
+	ALUOp = make_pair(false,false);
 	ALUSrcB = false;
 	ALUSrcA = false;
-	Cicle = 0;
+	Stage = 0;
 
 	OPcode.resize(3,false);
 
-	return;
 }
 
-void Control::~Control(){
+Control::~Control(){
 	PCWriteCond = false;
 	PCWrite = false;
 	MemINSTRead = false;
@@ -38,26 +37,26 @@ void Control::~Control(){
 	MemRead2 = false;
 	MemWrite1 = false;
 	MemWrite2 = false;
-	PCSource = false;
+	PCSource = make_pair(false,false);
 	MemDest = false;
-	AddresControl = false;
-	ALUOp = false;
+	AddresControl = make_pair(false,false);
+	ALUOp = make_pair(false,false);
 	ALUSrcB = false;
 	ALUSrcA = false;
-	Cicle = 0;
+	Stage = 0;
 
 	OPcode.clear();
 }
 
-void Control::setcicle(int n_cicle){
-	Cicle = n_cicle;
+void Control::setstage(int n_Stage){
+	Stage = n_Stage;
 	do_your_job();
 }
 
-void do_your_job(){
+void Control::do_your_job(){
 
 	/*ESCOLHE QUAIS REGISTRADORES*/
-	switch(Cicle){
+	switch(Stage){
 		case 0: 	/*FETCH*/						fetch(); Stage = next_stage(OPcode,Stage); return;
 		case 1: 	/*BUSCA REGISTRADORES*/			busca_reg(); Stage = next_stage(OPcode,Stage); return;
 		
@@ -73,17 +72,17 @@ void do_your_job(){
 
 	}
 
-	return;
+	returs;
 }
 
 
 void Control::fetch(){
 	MemINSTRead = true;
 	IRWrite = true;
-	ALUSrcA = false;
+	ALUSrControl::cA = false;
 	ALUSrcB = true;
 	ALUOp = make_pair(false,false);
-	PCSource = make_pair(false,false);
+	PCSource = make_Control::pair(false,false);
 	PCWrite = true;
 	
 	return;
@@ -93,7 +92,7 @@ void Control::busca_reg(vector<bool> instruction){
 	MemRead1 = true;
 	MemRead2 = true;
 
-	/*DEFINE OPcode*/
+	/*Control::DEFINE OPcode*/
 	for(int i = 13 ; i < 16; i++){
 		OPcode[i-13] = instruction[i];
 	}
@@ -175,7 +174,7 @@ void Control::conclui_jumpr(){
 	return;
 }
 
-int next_stage(OPcode,Stage){
+int next_stage(vector<bool> OPcode, int Stage){
 	if(Stage == 0){
 		return 1;
 	}else if(Stage == 1){
