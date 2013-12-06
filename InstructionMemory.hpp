@@ -19,10 +19,10 @@ using namespace std;
 
 class InstructionMemory {
 	/* VARIAVEIS:
-	 * vector<vector<bool> > iMemory = Memória de Instruções;
-	 * map<string, string> table = Mapeia todas as combinações de instruções para string;
-	 * bool MemINSTRead = Sinal enviado pelo controle para permissão de leitura;
-	 * size_t inst_size = Quantidade de instruções na memória;
+	*  vector<vector<bool> > iMemory = Memória de Instruções;
+	*  map<string, string> table = Mapeia todas as combinações de instruções para string;
+	*  bool MemINSTRead = Sinal enviado pelo controle para permissão de leitura;
+	*  size_t inst_size = Quantidade de instruções na memória;
 	*/
 
 private:
