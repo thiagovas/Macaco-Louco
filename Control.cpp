@@ -172,14 +172,18 @@ void Control::next_stage(){
 	}
 }
 
-void Control::go_my_children_i_free_you(Alu &alu1, Alu &alu2, InstructionMemory &im , DataMemory &dm  , Register &regs, InstReg &ir){
+void Control::go_my_children_i_free_you(Alu &alu1, Alu &alu2, InstructionMemory &im , DataMemory &dm  , Register &regs, InstReg &ir , Mux &muxpcsource, Mux &muxmemdest , Mux &muxaddrescontrol , Mux &muxalusrca , Mux &muxalusrcb ){
 	alu1.ALUop_update(ALUOp.second,ALUOp.first);
 	alu2.ALUop_update(ALUOp.second,ALUOp.first);
 	im.update_signal(MemINSTWrite);
 	dm.update_signal(MemRead1,MemRead2,MemWrite1,MemWrite2);
-	regs.
-	ir.
-	
+	regs.update_sign( ( alu1.zero_value() && PCWriteCond ) || (PCWrite) );
+	ir.update_sign(IRWrite);
+	muxpcsource..SetControlSign(PCSource);
+	muxmemdest.SetControlSign(MemDest);
+	muxaddrescontrol.SetControlSign(AddressControl);
+	muxalusrca.SetControlSign(make_pair(ALUSrcA,false));
+	muxalusrcb.SetControlSign(make_pair(ALUSrcB,false));
 
 }
 
