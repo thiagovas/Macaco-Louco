@@ -26,6 +26,7 @@ class DataMemory {
 		void Print();
 		void SetValue(string, vector<bool>);
 		void Clear();
+		vector<bool> GetValue(string);
 };
 
 #endif

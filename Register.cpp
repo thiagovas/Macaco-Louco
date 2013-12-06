@@ -37,3 +37,9 @@ void Register::SetValue(string index, vector<bool> value)
 	reg[table[index]] = data;
 }
 
+vector<bool> Register::GetValue(string index)
+{
+	if(index.size() != 3) throw "Endereço inválido de registrador.";
+	
+	return reg[table[index]];
+}
