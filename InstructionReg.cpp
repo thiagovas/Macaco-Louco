@@ -9,6 +9,8 @@ InstReg::~InstReg(){
 }
 
 void InstReg::SetValue(vector<bool> value){
+	if(!IRWrite) throw "Wadafuck Nigga! U Canot do dat!";
+
 	reg = value;	
 }
 
@@ -51,3 +53,4 @@ vector<bool> InstReg::get_bits (int lower, int upper){
 
 	return bits;
 }
+

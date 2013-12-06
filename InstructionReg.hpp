@@ -26,6 +26,7 @@ class InstReg
 	private:
 		vector<bool> reg;
 		int size; //Numero de bits que um registrador guarda
+		bool IRWrite;
 	public:
 		InstReg();
 		~InstReg();
