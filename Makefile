@@ -1,4 +1,4 @@
-# all: main
+all: main cleanafter
 
 main: main.cpp ALU.o DataMemory.o InstructionMemory.o Register.o Control.o
 	g++ main.cpp ALU.o DataMemory.o InstructionMemory.o Register.o Control.o -o main
@@ -18,7 +18,10 @@ InstructionMemory: InstructionMemory.cpp InstructionMemory.hpp
 Register: Register.cpp Register.hpp
 	g++ -c Register.cpp
 
-clean:
-	rm -f *.o
+clean: cleanafter
 	rm -f main
 	clear
+
+cleanafter:
+	rm -rf *.o
+	rm -rf *~
