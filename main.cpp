@@ -52,27 +52,8 @@ int main(int argc, char *argv[])
 	while(true){
 		controle.do_your_job();
 		controle.go_my_children_i_free_you(alu1,alu2,im,dm,regs,ir,muxpcsource,muxmemdest,muxaddrescontrol,muxalusrca,muxalusrcb);
-
-		if(controle.GetStage() == 0){
-
-		}else if(controle.GetStage() == 1){
-
-		}else if(controle.GetStage() == 2){
-
-		}else if(controle.GetStage() == 3){
-
-		}else if(controle.GetStage() == 4){
-
-		}else if(controle.GetStage() == 5){
-
-		}else if(controle.GetStage() == 6){
-
-		}else if(controle.GetStage() == 7){
-
-		}
-	}
-	
-	
+		
+	}	
 	
 	/* Finalizando tudo. Fechando streams e limpando tudo. */
 	fData.close();
