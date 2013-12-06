@@ -71,8 +71,8 @@ void DataMemory::Init(ifstream &stream)
 	vector<bool> data;
 	while(true)
 	{
-		cin >> input;
-		if(not cin) break;
+		stream >> input;
+		if(not stream) break;
 		i++;
 		if(input.size() == 0) continue;
 		
