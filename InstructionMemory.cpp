@@ -153,6 +153,8 @@ vector<bool> InstructionMemory::get_bits (int lower, int upper, int pos){
 
 vector<vector<bool> > InstructionMemory::get_instruction_formatted (int pos){
 
+	if (!MemINSTRead) cout << "Você se esqueceu de mandar o sinal para leitura!\n";
+
 	string opcode_s = get_opcode_formatted (pos);
 	vector<vector<bool> > formatted_inst;
 	vector<bool> test;
@@ -206,6 +208,7 @@ vector<bool> InstructionMemory::get_opcode (int pos){
 
 	if (pos % 18 != 0) cout << "I already told you Dave, I can't do that!!!\n";
 	if (pos / 18 > inst_size) cout << "I give up!\n";
+	if (!MemINSTRead) cout << "Você se esqueceu de mandar o sinal para leitura!\n";
 
 	vector<bool> opcode (3, false);
 
