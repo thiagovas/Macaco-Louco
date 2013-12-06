@@ -16,6 +16,14 @@ void Mux::SetControlSign(pair<bool, bool> sign)
 	this->controlSign = sign;
 }
 
+void Mux::SetControlSign(bool sign)
+{
+	if(sign)
+		this->controlSign = make_pair(false, false);
+	else
+		this->controlSign = make_pair(false, true);
+}
+
 pair<bool, bool> Mux::GetControlSign()
 {
 	return this->controlSign;
@@ -27,6 +35,13 @@ void Mux::SetInput(vector<bool> first, vector<bool> second, vector<bool> third, 
 	this->input[1] = second;
 	this->input[2] = third;
 	this->input[3] = fourth;
+}
+
+void Mux::SetInput(vector<bool> first, vector<bool> second)
+{
+	this->input[0] = first;
+	this->input[1] = second;
+	this->input[2] = this->input[3] = NULL;
 }
 
 vector<bool> Mux::GetOutput()
