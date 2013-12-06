@@ -24,7 +24,6 @@ Control::Control(){
 	Stage = 0;
 
 	OPcode.resize(3,false);
-
 }
 
 Control::~Control(){
@@ -32,33 +31,38 @@ Control::~Control(){
 	OPcode.clear();
 }
 
-void Control::setstage(int n_Stage){
-	Stage = n_Stage;
-	do_your_job();
+void Control::SetStage(int n_Stage)
+{
+	this->Stage = n_Stage;
+}
+
+int Control::GetStage()
+{
+	return this->Stage;
+}
+
+void Control::SetOPcode(vector<bool> input)
+{
+	if(input.size() != 3) throw "OPCode inválido.";
+	this->OPcode = input;	
 }
 
 void Control::do_your_job(){
-	vector<bool> magic;
-
 	/*ESCOLHE QUAIS REGISTRADORES*/
 	switch(this->Stage){
-		case 0: 	/*FETCH*/						fetch(); break;
-		case 1: 	/*BUSCA REGISTRADORES*/			busca_reg(magic); break;
-		
-		/*PARA ONDE VOU? OPcode RESPONDERÁ*/
-		case 2: 	/*EXECUÇÃO*/					executa(); break;
+		case 0: 	/*FETCH*/						Fetch(); break;
+		case 1: 	/*BUSCA REGISTRADORES*/			Decode(); break;
+		case 2: 	/*EXECUÇÃO*/					Execute(); break;
 		case 3: 	/*CONCLUSÃO DE TIPO R*/			conclui_r(); break;
 		case 4: 	/*TÉRMINO DO LOAD IMMEDIATE*/	conclui_loadi(); break;
 		case 5: 	/*VERIFICA BRANCH*/				branch(); break;
 		case 6: 	/*CONCLUSÃO JUMP*/				conclui_jump(); break;
 		case 7: 	/*CONCLUSÃO JUMPR*/				conclui_jumpr(); break;
 		default: cout << "Nao Conseguimos definir o Estado!\n "; Stage = 0;  return;
-	}
-	next_stage();
+	}	
 }
 
-
-void Control::fetch(){
+void Control::Fetch(){
 	MemINSTRead = true;
 	IRWrite = true;
 	ALUSrcA = false;
@@ -68,17 +72,19 @@ void Control::fetch(){
 	PCWrite = true;
 }
 
-void Control::busca_reg(vector<bool> instruction){
+void Control::Decode(){
 	MemRead1 = true;
 	MemRead2 = true;
 
 	/*Control::DEFINE OPcode*/
+	/*
 	for(int i = 13 ; i < 16; i++){
 		OPcode[i-13] = instruction[i];
 	}
+	*/
 }
 
-void Control::executa(){
+void Control::Execute(){
 	/*ADD*/
 	if( OPcode[0] == false && OPcode[1] == false && OPcode[2] == false ){
 		ALUSrcA = true;
