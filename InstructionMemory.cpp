@@ -263,7 +263,10 @@ void InstructionMemory::Init (ifstream &input){
 
 		binary.clear();
 
-		if (op == "ADD" || op == "SUB" || op == "AND" || op == "OR"){
+		if (op[0] == '0' || op[0] == '1'){
+			binary = op;
+		}
+		else if (op == "ADD" || op == "SUB" || op == "AND" || op == "OR"){
 			input >> dest >> reg1 >> reg2;
 			binary += invert(table[dest]) + invert(table[reg2]) + invert(table[reg1]) + invert(table[op]);
 		}
