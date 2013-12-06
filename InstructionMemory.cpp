@@ -112,7 +112,7 @@ vector<bool> InstructionMemory::get_instruction (vector<bool> PC){
 	int pos = 0;
 
 	for (int i = 0; i < PC.size(); i++){
-		// pos += PC[i]*pow(2, i);
+		pos += PC[i]*pow(2, i);
 	}
 
 	if (pos % 18 != 0) throw "I'm sorry Dave, I'm afraid I can't do that\n";
