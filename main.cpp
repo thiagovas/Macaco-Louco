@@ -18,7 +18,6 @@
 #include "ALU.hpp"
 #include "Register.hpp"
 #include <fstream>
-
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -34,7 +33,7 @@ int main(int argc, char *argv[])
 	fstream fOutput;
 	InstructionMemory im;
 	DataMemory dm;
-	Register PC;
+	Register reg;
 	Control controle;
 
 	fData.open(argv[1]);

@@ -48,7 +48,6 @@ void Control::SetOPcode(vector<bool> input)
 }
 
 void Control::do_your_job(){
-	/*ESCOLHE QUAIS REGISTRADORES*/
 	switch(this->Stage){
 		case 0: 	/*FETCH*/						Fetch(); break;
 		case 1: 	/*BUSCA REGISTRADORES*/			Decode(); break;
