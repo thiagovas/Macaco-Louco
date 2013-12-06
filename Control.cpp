@@ -5,7 +5,7 @@
 #include "Control.hpp"
 
 // Control Logic
-void Control::Control(){
+Control::Control(){
 	PCWriteCond = false;
 	PCWrite = false;
 	MemINSTRead = false;
@@ -15,20 +15,19 @@ void Control::Control(){
 	MemRead2 = false;
 	MemWrite1 = false;
 	MemWrite2 = false;
-	PCSource = false;
-	MemDest = false;
-	AddresControl = false;
-	ALUOp = false;
+	PCSource = make_pair(false,false);
+	MemDest = make_pair(false,false);
+	AddressControl = make_pair(false,false);
+	ALUOp = make_pair(false,false);
 	ALUSrcB = false;
 	ALUSrcA = false;
-	Cicle = 0;
+	Stage = 0;
 
 	OPcode.resize(3,false);
 
-	return;
 }
 
-void Control::~Control(){
+Control::~Control(){
 	PCWriteCond = false;
 	PCWrite = false;
 	MemINSTRead = false;
@@ -38,28 +37,29 @@ void Control::~Control(){
 	MemRead2 = false;
 	MemWrite1 = false;
 	MemWrite2 = false;
-	PCSource = false;
-	MemDest = false;
-	AddresControl = false;
-	ALUOp = false;
+	PCSource = make_pair(false,false);
+	MemDest = make_pair(false,false);
+	AddressControl = make_pair(false,false);
+	ALUOp = make_pair(false,false);
 	ALUSrcB = false;
 	ALUSrcA = false;
-	Cicle = 0;
+	Stage = 0;
 
 	OPcode.clear();
 }
 
-void Control::setcicle(int n_cicle){
-	Cicle = n_cicle;
+void Control::setstage(int n_Stage){
+	Stage = n_Stage;
 	do_your_job();
 }
 
-void do_your_job(){
+void Control::do_your_job(){
+	vector<bool> magic;
 
 	/*ESCOLHE QUAIS REGISTRADORES*/
-	switch(Cicle){
+	switch(Stage){
 		case 0: 	/*FETCH*/						fetch(); Stage = next_stage(OPcode,Stage); return;
-		case 1: 	/*BUSCA REGISTRADORES*/			busca_reg(); Stage = next_stage(OPcode,Stage); return;
+		case 1: 	/*BUSCA REGISTRADORES*/			busca_reg(magic); Stage = next_stage(OPcode,Stage); return;
 		
 		/*PARA ONDE VOU? OPcode RESPONDERÁ*/
 		case 2: 	/*EXECUÇÃO*/					executa(); Stage = next_stage(OPcode,Stage); return;
@@ -68,7 +68,7 @@ void do_your_job(){
 		case 5: 	/*VERIFICA BRANCH*/				branch(); Stage = next_stage(OPcode,Stage); return;
 		case 6: 	/*CONCLUSÃO JUMP*/				conclui_jump(); Stage = next_stage(OPcode,Stage); return;
 		case 7: 	/*CONCLUSÃO JUMPR*/				conclui_jumpr(); Stage = next_stage(OPcode,Stage); return;
-		case default: cout << "Nao Conseguimos definir o Estado!\n "; Stage = 0;  return;
+		default: cout << "Nao Conseguimos definir o Estado!\n "; Stage = 0;  return;
 
 
 	}
@@ -93,7 +93,7 @@ void Control::busca_reg(vector<bool> instruction){
 	MemRead1 = true;
 	MemRead2 = true;
 
-	/*DEFINE OPcode*/
+	/*Control::DEFINE OPcode*/
 	for(int i = 13 ; i < 16; i++){
 		OPcode[i-13] = instruction[i];
 	}
@@ -136,7 +136,7 @@ void Control::conclui_r(){
 	AddressControl = make_pair(false,true);
 	MemWrite1 = true;
 	MemWrite2 = true;
-	MemDst = make_pair(true,true);
+	MemDest = make_pair(true,true);
 
 	return;
 }
@@ -144,8 +144,8 @@ void Control::conclui_r(){
 void Control::conclui_loadi(){
 	MemWrite1 = true;
 	MemWrite2 = false;
-	MemDst = make_pair(false,false);
-	Address Control = make_pair(true,true);
+	MemDest = make_pair(false,false);
+	AddressControl = make_pair(true,true);
 
 	return;
 }
@@ -175,7 +175,7 @@ void Control::conclui_jumpr(){
 	return;
 }
 
-int next_stage(OPcode,Stage){
+int next_stage(vector<bool> OPcode, int Stage){
 	if(Stage == 0){
 		return 1;
 	}else if(Stage == 1){
@@ -210,7 +210,7 @@ int next_stage(OPcode,Stage){
 	}
 }
 
-void Control::go_my_children_i_libert_you(Alu &alu1, Alu &alu2, Alu &alu1, InstructionMemory &ir , DataMemory &dm ){
+void Control::go_my_children_i_libert_you(Alu &alu1, Alu &alu2, InstructionMemory &ir , DataMemory &dm ){
 	alu1.ALUop_update(ALUOp.second,ALUOp.first);
 	alu2.ALUop_update(ALUOp.second,ALUOp.first);
 
