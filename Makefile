@@ -1,4 +1,4 @@
-all: main cleanafter
+all: main
 
 main: main.cpp ALU.o DataMemory.o InstructionMemory.o Register.o Control.o
 	g++ main.cpp ALU.o DataMemory.o InstructionMemory.o Register.o Control.o -o main
@@ -6,7 +6,7 @@ main: main.cpp ALU.o DataMemory.o InstructionMemory.o Register.o Control.o
 ALU: ALU.cpp ALU.hpp
 	g++ -c ALU.cpp
 
-Control.o: Control.cpp Control.hpp
+Control: Control.cpp Control.hpp
 	g++ -c Control.cpp
 
 DataMemory: DataMemory.cpp DataMemory.hpp
