@@ -116,12 +116,12 @@ void InstructionMemory::reset_signal (){
 * Return: vector<bool> com 18 posições contendo a instrução;
 * Observações: Se a posição for invalida ou se a posição a ser lida for maior que 32, um Warning é lançado na tela.
 */
-vector<bool> InstructionMemory::get_instruction (int pos){
+vector<bool> InstructionMemory::get_instruction (int PC){
 
-	if (pos % 18 != 0) throw "I'm sorry Dave, I'm afraid I can't do that\n";
-	if (pos / 18 > inst_size) throw "Are you stupid?\n";
+	if (PC % 18 != 0) throw "I'm sorry Dave, I'm afraid I can't do that\n";
+	if (PC / 18 > inst_size) throw "Are you stupid?\n";
 
-	return iMemory[pos/18];
+	return iMemory[PC/18];
 }
 
 /*
@@ -130,12 +130,12 @@ vector<bool> InstructionMemory::get_instruction (int pos){
 * Return: Uma string contendo o opcode;
 * Observações: O sinal de leitura enviado pelo controle deve está setado como TRUE!
 */
-string InstructionMemory::get_opcode_formatted (int pos){
-	if (pos % 18 != 0) throw "Posição invalida\n";
-	if (pos / 18 > inst_size) throw "Não existe instrução nessa posição!\n";
+string InstructionMemory::get_opcode_formatted (int PC){
+	if (PC % 18 != 0) throw "Posição invalida\n";
+	if (PC / 18 > inst_size) throw "Não existe instrução nessa posição!\n";
 
 	string opcode_s;
-	vector<bool> opcode = get_opcode (pos);
+	vector<bool> opcode = get_opcode (PC);
 
 	for (int i = 0; i < opcode.size(); i++){
 		if (opcode[i]) opcode_s += '1';
@@ -151,13 +151,13 @@ string InstructionMemory::get_opcode_formatted (int pos){
 * Return: Um vector<bool> contendo os bits;
 * Observações: Nenhum;
 */
-vector<bool> InstructionMemory::get_bits (int lower, int upper, int pos){
+vector<bool> InstructionMemory::get_bits (int lower, int upper, int PC){
 	if (lower < 0 || upper > 18) throw "Limites errados!\n";
 
 	vector<bool> bits (upper-lower+1, false);
 
 	for (int i = lower; i <= upper; i++){
-		if (iMemory[pos][i]) bits[i-lower] = true;
+		if (iMemory[PC][i]) bits[i-lower] = true;
 	}
 
 	return bits;
@@ -169,48 +169,48 @@ vector<bool> InstructionMemory::get_bits (int lower, int upper, int pos){
 * Return: Um vector<vector<bool>> contendo a instrução formatada;
 * Observações: Nenhum;
 */
-vector<vector<bool> > InstructionMemory::get_instruction_formatted (int pos){
+vector<vector<bool> > InstructionMemory::get_instruction_formatted (int PC){
 
 	if (!MemINSTRead) throw "Você se esqueceu de mandar o sinal para leitura no InstructionMemory!\n";
 
-	string opcode_s = get_opcode_formatted (pos);
+	string opcode_s = get_opcode_formatted (PC);
 	vector<vector<bool> > formatted_inst;
 	vector<bool> test;
 
 	if (opcode_s[0] == '0'){
 		// Instruções do tipo R -  ADD M0 M1 M2;
 		formatted_inst.resize (4);
-		formatted_inst[0] = get_bits (15, 17, pos/18); // Opcode;
-		formatted_inst[1] = get_bits (10, 14, pos/18); // Registrador M1;
-		formatted_inst[2] = get_bits (5, 9, pos/18);   // Registrador M2;
-		formatted_inst[3] = get_bits (0, 4, pos/18);   // Registrador M0;
+		formatted_inst[0] = get_bits (15, 17, PC/18); // Opcode;
+		formatted_inst[1] = get_bits (10, 14, PC/18); // Registrador M1;
+		formatted_inst[2] = get_bits (5, 9, PC/18);   // Registrador M2;
+		formatted_inst[3] = get_bits (0, 4, PC/18);   // Registrador M0;
 	}
 	else if (opcode_s == "100"){
 		// Instrução LWI - LWI M0 Label;
 		formatted_inst.resize (3);
-		formatted_inst[0] = get_bits (15, 17, pos/18); // Opcode;
-		formatted_inst[1] = get_bits (10, 14, pos/18); // Registrador destino (M0);
-		formatted_inst[2] = get_bits (0, 9, pos/18);   // Label;
+		formatted_inst[0] = get_bits (15, 17, PC/18); // Opcode;
+		formatted_inst[1] = get_bits (10, 14, PC/18); // Registrador destino (M0);
+		formatted_inst[2] = get_bits (0, 9, PC/18);   // Label;
 	}
 	else if (opcode_s == "101"){
 		// Instrução BNE - BNE M0 M1 Label;
 		formatted_inst.resize (4);
-		formatted_inst[0] = get_bits (15, 17, pos/18); // Opcode;
-		formatted_inst[1] = get_bits (10, 14, pos/18); // Registrador M0;
-		formatted_inst[2] = get_bits (5, 9, pos/18); // Registrador M1;
-		formatted_inst[3] = get_bits (0, 4, pos/18); // Label;
+		formatted_inst[0] = get_bits (15, 17, PC/18); // Opcode;
+		formatted_inst[1] = get_bits (10, 14, PC/18); // Registrador M0;
+		formatted_inst[2] = get_bits (5, 9, PC/18); // Registrador M1;
+		formatted_inst[3] = get_bits (0, 4, PC/18); // Label;
 	}
 	else if (opcode_s == "110"){
 		// Instrução J - J Label
 		formatted_inst.resize (2);
-		formatted_inst[0] = get_bits (15, 17, pos/18); // Opcode;
-		formatted_inst[1] = get_bits (0, 9, pos/18); // Posição da memória que ele deve pular;
+		formatted_inst[0] = get_bits (15, 17, PC/18); // Opcode;
+		formatted_inst[1] = get_bits (0, 9, PC/18); // Posição da memória que ele deve pular;
 	}
 	else {
 		// Instrução JR - JR M0
 		formatted_inst.resize (2);
-		formatted_inst[0] = get_bits (15, 17, pos/18); // Opcode;
-		formatted_inst[1] = get_bits (0, 4, pos/18); // Rregistrador M0;
+		formatted_inst[0] = get_bits (15, 17, PC/18); // Opcode;
+		formatted_inst[1] = get_bits (0, 4, PC/18); // Rregistrador M0;
 	}
 
 	return formatted_inst;
@@ -222,16 +222,16 @@ vector<vector<bool> > InstructionMemory::get_instruction_formatted (int pos){
 * Return: Vector<bool> contendo os três bits do opcode (saída está especificada no README.md);
 * Observações: Se a posição lida não for uma posição valida, o programa lança um warning!
 */
-vector<bool> InstructionMemory::get_opcode (int pos){
+vector<bool> InstructionMemory::get_opcode (int PC){
 
-	if (pos % 18 != 0) throw "I already told you Dave, I can't do that!!!\n";
-	if (pos / 18 > inst_size) throw "I give up!\n";
+	if (PC % 18 != 0) throw "I already told you Dave, I can't do that!!!\n";
+	if (PC / 18 > inst_size) throw "I give up!\n";
 	if (!MemINSTRead) throw "Você se esqueceu de mandar o sinal para leitura!\n";
 
 	vector<bool> opcode (3, false);
 
 	for (int i=15; i<18; i++){
-		if (iMemory[pos/18][i]) opcode[i-15] = true;
+		if (iMemory[PC/18][i]) opcode[i-15] = true;
 		else opcode[i-15] = false;
 	}
 
@@ -302,6 +302,13 @@ void InstructionMemory::Init (ifstream &input){
 		}
 	}
 
+}
+
+bool InstructionMemory::come_back_cracken (int PC){
+	if (PC % 18 != 0) throw "Posição invalida!\n";
+	if (PC / 18 > inst_size) return true;
+
+	return false;
 }
 
 /*
