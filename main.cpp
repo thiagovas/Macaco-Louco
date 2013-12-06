@@ -35,16 +35,8 @@ int main(int argc, char *argv[])
 	DataMemory dm;
 	Register reg;
 	Control controle;
-<<<<<<< HEAD
-<<<<<<< HEAD
-	Alu alu1,alu2;
-=======
-    int instructionPos = 0;
->>>>>>> ef1c3201b3970924e2529b0e0e0cabdb475919bf
-=======
     int instructionPos = 0;
 	Alu alu1,alu2;
->>>>>>> b12dcc8638724e3e2a4fef39105ff837c4f5c52a
 
 	fData.open(argv[1]);
 	fInstructions.open(argv[2]);
