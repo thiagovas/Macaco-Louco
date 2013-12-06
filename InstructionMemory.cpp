@@ -158,28 +158,39 @@ vector<vector<bool> > InstructionMemory::get_instruction_formatted (int pos){
 	vector<bool> test;
 
 	if (opcode_s[0] == '0'){
-		// Instruções do tipo R;
+		// Instruções do tipo R -  ADD M0 M1 M2;
 		formatted_inst.resize (4);
-		formatted_inst[0] = get_bits (15, 17, pos/18);
-		formatted_inst[1] = get_bits (10, 14, pos/18);
-		formatted_inst[2] = get_bits (5, 9, pos/18);
-		formatted_inst[3] = get_bits (0, 4, pos/18);		
+		formatted_inst[0] = get_bits (15, 17, pos/18); // Opcode;
+		formatted_inst[1] = get_bits (10, 14, pos/18); // Registrador M1;
+		formatted_inst[2] = get_bits (5, 9, pos/18);   // Registrador M2;
+		formatted_inst[3] = get_bits (0, 4, pos/18);   // Registrador M0;
 	}
 	else if (opcode_s == "100"){
-		// LWI
-
+		// Instrução LWI - LWI M0 Label;
+		formatted_inst.resize (3);
+		formatted_inst[0] = get_bits (15, 17, pos/18); // Opcode;
+		formatted_inst[1] = get_bits (10, 14, pos/18); // Registrador destino (M0);
+		formatted_inst[2] = get_bits (0, 9, pos/18);   // Label;
 	}
 	else if (opcode_s == "101"){
-		// BNE
-	
+		// Instrução BNE - BNE M0 M1 Label;
+		formatted_inst.resize (4);
+		formatted_inst[0] = get_bits (15, 17, pos/18); // Opcode;
+		formatted_inst[1] = get_bits (10, 14, pos/18); // Registrador M0;
+		formatted_inst[2] = get_bits (5, 9, pos/18); // Registrador M1;
+		formatted_inst[3] = get_bits (0, 4, pos/18); // Label;
 	}
 	else if (opcode_s == "110"){
-		// J
-
+		// Instrução J - J Label
+		formatted_inst.resize (2);
+		formatted_inst[0] = get_bits (15, 17, pos/18); // Opcode;
+		formatted_inst[1] = get_bits (0, 9, pos/18); // Posição da memória que ele deve pular;
 	}
 	else {
-		// JR
-
+		// Instrução JR - JR M0
+		formatted_inst.resize (2);
+		formatted_inst[0] = get_bits (15, 17, pos/18); // Opcode;
+		formatted_inst[1] = get_bits (0, 4, pos/18); // Rregistrador M0;
 	}
 
 	return formatted_inst;
