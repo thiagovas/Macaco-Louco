@@ -33,11 +33,13 @@ class Register
 		vector<vector<bool> > reg;
 		map<string, int> table;
 		int size; //Numero de bits que um registrador guarda
+		bool controlSign;
 	public:
 		Register();
 		~Register();
 		void SetValue(string, vector<bool>);
 		vector<bool> GetValue(string);
+		void UpdateSign(bool); // Seta o sinal do controle que permite a escrita no registrador
 };
 
 #endif
