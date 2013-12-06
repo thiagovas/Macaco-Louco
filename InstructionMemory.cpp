@@ -73,8 +73,11 @@ void InstructionMemory::imprime (){
 	cout << endl;
 }
 
-vector<bool> InstructionMemory::getter (int pos){
-	return iMemory[pos];
+vector<bool> InstructionMemory::get_instruction (int pos){
+
+	if (pos % 18 != 0) cout << "I'm sorry Dave, I'm afraid I can't do that\n";
+
+	return iMemory[pos/18];
 }
 
 void InstructionMemory::init (ifstream &input){
