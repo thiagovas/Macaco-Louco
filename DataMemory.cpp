@@ -95,9 +95,9 @@ void DataMemory::Init(ifstream &stream)
 		for(int cont = 0; i < input.size(); i++)
 		{
 			if(input[cont] == 0)
-				data.insert(data.begin(), false);
+				data.insert(data.end(), false);
 			else if(input[cont] == 1)
-				data.insert(data.begin(), true);
+				data.insert(data.end(), true);
 			else
 				throw "Dados inválidos no arquivo com dados.";
 		}
