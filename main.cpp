@@ -18,10 +18,7 @@
 #include "ALU.hpp"
 #include "Register.hpp"
 #include "InstructionReg.hpp"
-<<<<<<< HEAD
-=======
 #include "Mux.hpp"
->>>>>>> a46b5b21bb08b81b4fb5d889a20f68d1a4aedbf1
 #include <fstream>
 using namespace std;
 
