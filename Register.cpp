@@ -21,17 +21,13 @@ Register::~Register()
 
 void Register::SetValue(string index, vector<bool> value)
 {
-
 	std::stringstream message;
 	message << "Registradores guardam no máximo " << this->size << " bits.\n";
 	
-	if(!this->controlSign && index == "PC"){
-		cout << "Dentro da Funcao\n";
-		return;
-	}
-
+	if(!this->controlSign && index == "PC") return;
+	
 	if(value.size() > this->size) cout << message.str();
-	if(table.find(index) == table.end()) cout << "Endereço inválido de registrador2.\n";	
+	if(table.find(index) == table.end()) cout << "Endereço inválido de registrador.\n";	
 	
 	int tam;
 	tam = this->size;

@@ -5,36 +5,36 @@ DataMemory::DataMemory()
 {
 	dMemory.resize (32, vector<bool> (16, false));
 	table["00000"] = 0;
-	table["00001"] = 1;
-	table["00010"] = 2;
-	table["00011"] = 3;
+	table["10000"] = 1;
+	table["01000"] = 2;
+	table["11000"] = 3;
 	table["00100"] = 4;
-	table["00101"] = 5;
-	table["00110"] = 6;
-	table["00111"] = 7;
-	table["01000"] = 8;
-	table["01001"] = 9;
+	table["10100"] = 5;
+	table["01100"] = 6;	
+	table["11100"] = 7;
+	table["00010"] = 8;
+	table["10010"] = 9;
 	table["01010"] = 10;
-	table["01011"] = 11;
-	table["01100"] = 12;
-	table["01101"] = 13;
+	table["11010"] = 11;
+	table["00110"] = 12;
+	table["10110"] = 13;
 	table["01110"] = 14;
-	table["01111"] = 15;
-	table["10000"] = 16;
+	table["11110"] = 15;
+	table["00001"] = 16;
 	table["10001"] = 17;
-	table["10010"] = 18;
-	table["10011"] = 19;
-	table["10100"] = 20;
+	table["01001"] = 18;
+	table["11001"] = 19;
+	table["00101"] = 20;
 	table["10101"] = 21;
-	table["10110"] = 22;
-	table["10111"] = 23;
-	table["11000"] = 24;
-	table["11001"] = 25;
-	table["11010"] = 26;
+	table["01101"] = 22;
+	table["11101"] = 23;
+	table["00011"] = 24;
+	table["10011"] = 25;
+	table["01011"] = 26;
 	table["11011"] = 27;
-	table["11100"] = 28;
-	table["11101"] = 29;
-	table["11110"] = 30;
+	table["00111"] = 28;
+	table["10111"] = 29;
+	table["01111"] = 30;
 	table["11111"] = 31;
 }
 
@@ -87,20 +87,18 @@ void DataMemory::Init(ifstream &stream)
 		// getline(stream, input);
 		if(not stream) break;
 
-		// i++;
 		if(input.size() == 0) continue;
 		
-		/* Convertendo a string do arquivo de dados para um vector de bools. */
+		/* Convertendo a string do arquivo de dados para um vector de bools.*/
 		data.clear();
-		for(int cont = input.size(); cont >= 0; cont--)
+		for(int cont = input.size()-1; cont >= 0; cont--)
 		{
 			if(input[cont] == '0')
 				data.push_back(false);
 			else if(input[cont] == '1')
 				data.push_back(true);
 			else{
-				cout << "Dados inválidos no arquivo com dados.\n";
-				cout << input[cont] << ' ';
+				if((int)input[cont] != 0) cout << "Dados inválidos no arquivo com dados.\n";
 			}
 		}
 
@@ -133,21 +131,21 @@ void DataMemory::SetValue(int index, vector<bool> input)
 		for(int i = input.size(); i < 16; i++)
 			data.push_back(false);
 	}
-cout << "Index " << index << "\nData  : "  ;
-for(int i = data.size()-1 ; i >= 0 ; i--){
-	cout << data[i];
-}
-cout << endl;
+	cout << "Index " << index << "\nData  : "  ;
+	for(int i = data.size()-1 ; i >= 0 ; i--){
+		cout << data[i];
+	}
+	cout << endl;
 	dMemory[index] = data;
 }
 
 void DataMemory::SetValue(vector<bool> index, vector<bool> input)
 {
-cout << "Recebido : ";
-for(int i = index.size()-1; i >=0 ; i--){
-	cout << index[i];
-}
-cout << endl;
+	cout << "Recebido : ";
+	for(int i = index.size()-1; i >=0 ; i--){
+		cout << index[i];
+	}
+	cout << endl;
 	if(MemWrite1)
 		SetValue(fromVectorToInt(index), input);
 }
@@ -177,6 +175,7 @@ vector<bool> DataMemory::GetValue(vector<bool> index)
 {
 	if(MemRead1 && MemRead2)
 		return GetValue(fromVectorToInt(index));
+	else return vector<bool>(0);
 }
 
 int fromVectorToInt(vector<bool> input)

@@ -29,6 +29,6 @@ vector<bool> Adder::SumOne(vector<bool> input)
 	while (input.size() > 5){
 		input.pop_back();
 	}
-
+	
 	return input;
 }

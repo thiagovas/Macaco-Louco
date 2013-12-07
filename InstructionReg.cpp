@@ -17,7 +17,7 @@ InstReg::~InstReg(){
 void InstReg::SetValue(vector<bool> value){
 	if(!IRWrite) /*cout << "Wadafuck Nigga! U Canot do dat!";*/
 		return;
-		
+	
 	reg = value;	
 }
 
