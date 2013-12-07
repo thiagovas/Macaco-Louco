@@ -32,7 +32,7 @@ class Alu{
 
 	public:
 		// RECEBE VALORES DE A, B e OP
-		void setvalues(vector<bool>,vector<bool>,bool,bool);
+		void setvalues(vector<bool>,vector<bool>);
 	
 		// FAZ A OPERAÇÃO E RETORNA O RESULTADO
 		void do_operation();
