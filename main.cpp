@@ -84,8 +84,11 @@ int main(int argc, char *argv[])
 		/*PASSA VALOR AO REGISTRADOR ALUOUT2*/
 		regs.SetInput( "ALUout2", alu2.result_value() );
 
-		/*INCLUI INCLUDES PARA O MEMDest*/
-		muxmemdest.SetInput(ir.get_rs(),ir.get_rt(),ir.get_rd());
+		/*INCLUI INCLUDES PARA O MEMDest (REPARE QUE O CTE NUNCA PODERÁ SER USADO)*/
+		muxmemdest.SetInput(ir.get_rs(),ir.get_rt(),ir.get_rd(),cte);
+		/*INCLUI INPUTS PARA O AddressControl*/
+		muxaddrescontrol.SetInput();
+		im.SetValue(muxmemdest.GetOutput(), muxaddrescontrol.GetOutput() );
 
 
 		/*INCLUI AS ENTRADAS AO PCSource E USA SEU OUTPUT PARA SETAR O PC*/
