@@ -134,7 +134,14 @@ void DataMemory::SetValue(int index, vector<bool> input)
 
 void DataMemory::SetValue(vector<bool> index, vector<bool> input)
 {
-	SetValue(fromVectorToInt(index), input);
+	if(MemWrite1)
+		SetValue(fromVectorToInt(index), input);
+}
+
+void DataMemory::SetValue2(vector<bool> index, vector<bool> input)
+{
+	if(MemWrite2)
+		SetValue(fromVectorToInt(index), input);
 }
 
 // Função que retorna o valor de uma posição do data memory

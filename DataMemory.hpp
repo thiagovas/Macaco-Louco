@@ -31,6 +31,7 @@ class DataMemory {
 		void SetValue(string, vector<bool>);
 		void SetValue(int, vector<bool>);
 		void SetValue(vector<bool>, vector<bool>);
+		void SetValue2(vector<bool>, vector<bool>);
 		void Clear();
 		vector<bool> GetValue(string);
 		vector<bool> GetValue(int);
