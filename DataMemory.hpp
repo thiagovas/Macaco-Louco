@@ -26,7 +26,7 @@ class DataMemory {
 
 		// Imprime toda a memória de instruções;
 		void update_signal (bool MemRead1, bool MemRead2, bool MemWrite1, bool MemWrite2);
-		void Print();
+		void Print(fstream&);
 		void Init(ifstream&);
 		void SetValue(string, vector<bool>);
 		void SetValue(int, vector<bool>);

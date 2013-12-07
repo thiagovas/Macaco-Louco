@@ -56,8 +56,13 @@ int main(int argc, char *argv[])
 	dm.Init(fData);
 
 	controle.SetStage(0);
-	while(true){
+
+	int inst_num = 0;
+
+	while(inst_num < im.GetNumInstructions()){
+
 		controle.do_your_job();
+controle.print();
 		controle.go_my_children_i_free_you(alu1,alu2,im,dm,regs,ir,muxpcsource,muxmemdest,muxaddrescontrol,muxalusrca,muxalusrcb);
 
 		/*PEGA INSTRUÇÃO NA MEMÓRIA E PASSADO PARA O REGISTRADOR DE INSTRUÇÕES*/
@@ -103,6 +108,10 @@ int main(int argc, char *argv[])
 
 		/*PASSA PARA O PRÓXIMO ESTÁGIO*/
 		controle.next_stage();
+		
+		if(controle.GetStage() == 0)
+			inst_num++;
+		
 	}
 	
 	
@@ -114,5 +123,3 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
-
-

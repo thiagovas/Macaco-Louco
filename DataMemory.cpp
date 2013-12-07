@@ -57,15 +57,15 @@ void DataMemory::update_signal (bool MemRead1, bool MemRead2, bool MemWrite1, bo
 }
 
 // Imprime;
-void DataMemory::Print()
+void DataMemory::Print(fstream &file)
 {
 	for (int i = 0; i < dMemory.size(); i++){
 		for (int j = 0; j < dMemory[i].size(); j++){
-			cout << dMemory[i][j];
+			file << dMemory[i][j];
 		}
-		cout << endl;
+		file << endl;
 	}
-	cout << endl;
+	file << endl;
 }
 
 void DataMemory::Clear()
