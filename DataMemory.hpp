@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstdio>
 #include <algorithm>
+#include <cmath>
 #include <utility>
 #include <functional>
 #include <iomanip>
@@ -29,9 +30,13 @@ class DataMemory {
 		void Init(ifstream&);
 		void SetValue(string, vector<bool>);
 		void SetValue(int, vector<bool>);
+		void SetValue(vector<bool>, vector<bool>);
 		void Clear();
 		vector<bool> GetValue(string);
 		vector<bool> GetValue(int);
+		vector<bool> GetValue(vector<bool>);
 };
+
+int fromVectorToInt(vector<bool>);
 
 #endif

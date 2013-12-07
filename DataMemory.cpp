@@ -61,7 +61,7 @@ void DataMemory::Print()
 {
 	for (int i = 0; i < dMemory.size(); i++){
 		for (int j = 0; j < dMemory[i].size(); j++){
-			cout << dMemory[i][j] << ' ';
+			cout << dMemory[i][j];
 		}
 		cout << endl;
 	}
@@ -132,6 +132,11 @@ void DataMemory::SetValue(int index, vector<bool> input)
 	dMemory[index] = data;
 }
 
+void DataMemory::SetValue(vector<bool> index, vector<bool> input)
+{
+	SetValue(fromVectorToInt(index), input);
+}
+
 // Função que retorna o valor de uma posição do data memory
 vector<bool> DataMemory::GetValue(string index)
 {
@@ -145,4 +150,18 @@ vector<bool> DataMemory::GetValue(int index)
 	if(index < 0 || index > 31) throw "Endereço inválido de memória de dados.";
 	
 	return dMemory[index];
+}
+
+vector<bool> DataMemory::GetValue(vector<bool> index)
+{
+	return GetValue(fromVectorToInt(index));
+}
+
+int fromVectorToInt(vector<bool> input)
+{
+	int result = 0;
+	for(int i = input.size()-1; i >= 0; i--)
+		if(input[i])
+			result += pow(2, i);
+	return result;
 }
