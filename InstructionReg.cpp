@@ -80,19 +80,16 @@ vector<bool> InstReg::get_immed10(){
 	return get_bits(0,9);
 }
 
-<<<<<<< HEAD
+vector<bool> InstReg::get_immed15(){
+	return get_bits(0,14);
+}
+
 /*
 * Função: Retorna os bits que estão no intervalo [lower, upper]
 * Parâmetro(s): Limites do intervalo [lower, upper]
 * Return: Um vector de bools que representam a sequencia de bits que está no intervalo [lower, upper]
 * Observações: lower não pode ser negativo e upper não pode ser maior que 17.
 */
-=======
-vector<bool> InstReg::get_immed15(){
-	return get_bits(0,14);
-}
-
->>>>>>> feaabcea8d179e1df8b50f7a81e4b08a220c90f9
 vector<bool> InstReg::get_bits (int lower, int upper){
 	if (lower < 0 || upper > 17) throw "Limites errados!\n";
 
