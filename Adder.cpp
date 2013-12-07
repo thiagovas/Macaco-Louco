@@ -6,6 +6,7 @@ Adder::Adder()
 Adder::~Adder()
 {}
 
+
 vector<bool> Adder::SumOne(vector<bool> input)
 {
 	Alu ula;
