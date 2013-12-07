@@ -40,6 +40,9 @@ int main(int argc, char *argv[])
 	Alu alu1,alu2;
 	InstReg ir;
 	Mux muxpcsource,muxmemdest,muxaddrescontrol,muxalusrca,muxalusrcb;
+	vector<bool> cte (16,false);
+	cte[1] = true;
+	cte[4] = true;
 
 	fData.open(argv[1]);
 	fInstructions.open(argv[2]);
@@ -54,17 +57,40 @@ int main(int argc, char *argv[])
 		controle.go_my_children_i_free_you(alu1,alu2,im,dm,regs,ir,muxpcsource,muxmemdest,muxaddrescontrol,muxalusrca,muxalusrcb);
 
 		/*PEGA INSTRUÇÃO NA MEMÓRIA E PASSADO PARA O REGISTRADOR DE INSTRUÇÕES*/
-		ir.SetValue( im.get_instruction( regs.GetValue(string) ) );
+		ir.SetValue( im.get_instruction( regs.GetValue("PC") ) );
+
+
+		regs.SetInput( "A",dm.GetValue(ir.get_rs()) );
+		regs.SetInput( "B",dm.GetValue(ir.get_rt()) );
+		regs.SetInput( "C",dm.GetValue(/*ir.get_rs()+1*/) );
+		regs.SetInput( "D",dm.GetValue(/*ir.get_rt())+1*/ );
+
+		/*COLOCA INPUTS PARA O MUX ALUSrcA*/
+		muxalusrca.SetInput( regs.GetValue("PC") , regs.GetValue("A") );
+		
+		/*COLOCA INPUTS PARA O MUX ALUSrcB*/
+		muxalusrcb.SetInput( regs.GetValue("B") , cte );
+
 
 		/*INICIALIZA AS ALUs  E FAZ SUAS OPERAÇÕES*/
-		alu1.set_values(ir.get_rs(),ir.get_rt());
+		alu1.set_values(muxalusrca.GetOutput(),muxalusrcb.GetOutput());
 		// alu2.set_values(ir.get_rs(),ir.get_rt());
 		alu1.do_operation();
 		// alu2.do_operation();
 
+		/*PASSA VALOR AO REGISTRADOR ALUOUT1*/
+		regs.SetInput( "ALUout1", alu1.result_value() );
 
-		muxpcsource.SetInput(alu1.result_value(),ir.get_immed5(),);
-		regs.SetValue("PC",)
+		/*PASSA VALOR AO REGISTRADOR ALUOUT2*/
+		regs.SetInput( "ALUout2", alu2.result_value() );
+
+		/*INCLUI INCLUDES PARA O MEMDest*/
+		muxmemdest.SetInput(ir.get_rs(),ir.get_rt(),ir.get_rd());
+
+
+		/*INCLUI AS ENTRADAS AO PCSource E USA SEU OUTPUT PARA SETAR O PC*/
+		muxpcsource.SetInput(alu1.result_value(),ir.get_immed5(),ir.get_immed15(),regs.GetValue("A"));
+		regs.SetValue("PC",muxpcsource.GetOutput());
 
 
 
