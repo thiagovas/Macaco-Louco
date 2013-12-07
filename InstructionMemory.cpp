@@ -115,10 +115,10 @@ vector<bool> InstructionMemory::get_instruction (vector<bool> PC){
 		if (PC[i]) pos += PC[i]*pow(2, i);
 	}
 
-	if (pos % 18 != 0) throw "I'm sorry Dave, I'm afraid I can't do that\n";
-	if (pos / 18 > inst_size) throw "Are you stupid?\n";
+	// if (pos % 18 != 0) cout << "I'm sorry Dave, I'm afraid I can't do that\n";
+	if (pos > inst_size) cout << "Are you stupid?\n";
 
-	return iMemory[pos/18];
+	return iMemory[pos];
 }
 
 /*
@@ -128,8 +128,8 @@ vector<bool> InstructionMemory::get_instruction (vector<bool> PC){
 * Observações: O sinal de leitura enviado pelo controle deve estar setado como TRUE!
 */
 string InstructionMemory::get_opcode_formatted (int PC){
-	if (PC % 18 != 0) throw "Posição invalida\n";
-	if (PC / 18 > inst_size) throw "Não existe instrução nessa posição!\n";
+	if (PC % 18 != 0) cout << "Posição invalida\n";
+	if (PC / 18 > inst_size) cout << "Não existe instrução nessa posição!\n";
 
 	string opcode_s;
 	vector<bool> opcode = get_opcode (PC);
@@ -149,7 +149,7 @@ string InstructionMemory::get_opcode_formatted (int PC){
 * Observações: Nenhum;
 */
 vector<bool> InstructionMemory::get_bits (int lower, int upper, int PC){
-	if (lower < 0 || upper > 17) throw "Limites errados!\n";
+	if (lower < 0 || upper > 17) cout << "Limites errados!\n";
 
 	vector<bool> bits (upper-lower+1, false);
 
@@ -168,7 +168,7 @@ vector<bool> InstructionMemory::get_bits (int lower, int upper, int PC){
 */
 vector<vector<bool> > InstructionMemory::get_instruction_formatted (int PC){
 
-	if (!MemINSTRead) throw "Você esqueceu de mandar o sinal para leitura no InstructionMemory!\n";
+	if (!MemINSTRead) cout << "Você esqueceu de mandar o sinal para leitura no InstructionMemory!\n";
 
 	string opcode_s = get_opcode_formatted (PC);
 	vector<vector<bool> > formatted_inst;
@@ -221,9 +221,9 @@ vector<vector<bool> > InstructionMemory::get_instruction_formatted (int PC){
 */
 vector<bool> InstructionMemory::get_opcode (int PC){
 
-	if (PC % 18 != 0) throw "I already told you Dave, I can't do that!!!\n";
-	if (PC / 18 > inst_size) throw "I give up!\n";
-	if (!MemINSTRead) throw "Você se esqueceu de mandar o sinal para leitura!\n";
+	if (PC % 18 != 0) cout << "I already told you Dave, I can't do that!!!\n";
+	if (PC / 18 > inst_size) cout << "I give up!\n";
+	if (!MemINSTRead) cout << "Você se esqueceu de mandar o sinal para leitura!\n";
 
 	vector<bool> opcode (3, false);
 
@@ -245,7 +245,7 @@ vector<bool> InstructionMemory::get_opcode (int PC){
 void InstructionMemory::Init (ifstream &input){
 
 	if (!input.is_open ()){
-		throw "Oh crap!\n";
+		cout << "Oh crap!\n";
 	}
 
 	string dest, reg1, reg2, op, binary;
@@ -302,7 +302,7 @@ void InstructionMemory::Init (ifstream &input){
 }
 
 bool InstructionMemory::come_back_cracken (int PC){
-	if (PC % 18 != 0) throw "Posição invalida!\n";
+	if (PC % 18 != 0) cout << "Posição invalida!\n";
 	if (PC / 18 > inst_size) return true;
 
 	return false;

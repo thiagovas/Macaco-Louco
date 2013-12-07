@@ -1,7 +1,7 @@
-all: main cleanafter
+all: main
 
 main: main.cpp ALU.o DataMemory.o InstructionMemory.o Register.o Control.o Mux.o InstructionReg.o Adder.o
-	g++ main.cpp ALU.o DataMemory.o InstructionMemory.o Register.o Control.o Mux.o InstructionReg.o Adder.o -o main
+	g++ -g main.cpp ALU.o DataMemory.o InstructionMemory.o Register.o Control.o Mux.o InstructionReg.o Adder.o -o main
 
 ALU: ALU.cpp ALU.hpp
 	g++ -c ALU.cpp

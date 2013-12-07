@@ -28,6 +28,7 @@ class Mux{
 		void SetInput(vector<bool>, vector<bool>); //Mesma coisa do set de cima, mas esse metodo serve para os muxes que tem somente dois inputs
 		// Retorna o output do Mux
 		vector<bool> GetOutput();
+		void print();
 };
 
 #endif

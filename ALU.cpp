@@ -13,10 +13,34 @@
 
 /*INICIALIZA VALORES*/
 void Alu::setvalues(vector<bool> input_a, vector<bool> input_b){
+// cout << "input_a : ";
+// for(int i = input_a.size()-1 ; i >= 0 ; i--){
+// 	cout << input_a[i];
+// }
+// cout << endl;
+// cout << "input_b : ";
+// for(int i = input_b.size()-1 ; i >= 0 ; i--){
+// 	cout << input_b[i];
+// }
+// cout << endl;
+
+
 	a = input_a;
 	b = input_b;
 	zero = false;
 	overflow = false;
+
+// cout << "a : ";
+// for(int i = a.size()-1 ; i >= 0 ; i--){
+// 	cout << a[i];
+// }
+// cout << endl;
+// cout << "b : ";
+// for(int i = b.size()-1 ; i >= 0 ; i--){
+// 	cout << b[i];
+// }
+// cout << endl;
+
 
 	/*ALOCA O RESULTADO PRA SER 0*/
 	result.resize(16,false);
@@ -173,22 +197,22 @@ bool Alu::zero_value(){
 void Alu::print(){
 	
 	cout << "RS: ";
-	for(int i = 16 ; i >= 0 ; i--){
+	for(int i = 15 ; i >= 0 ; i--){
 		cout << a[i];
 	}
 	cout << endl;
 
 	cout << "RT: ";
-	for(int i = 16 ; i >= 0 ; i--){
+	for(int i = 15 ; i >= 0 ; i--){
 		cout << b[i];
 	}
 	cout << endl;
 
 	cout << "RD: ";
-	for(int i = 16 ; i >= 0 ; i--){
+	for(int i = 15 ; i >= 0 ; i--){
 		cout << result[i];
 	}
-	cout << endl << "Zero: " << zero << endl << "ALUop: " << ALUop << endl << endl;
+	cout << endl << "Zero: " << zero << endl << "ALUop: " << ALUop << endl << "OVERFLOW :" << overflow << endl << endl;
 
 	return;
 }

@@ -5,7 +5,6 @@ Register::Register()
 	this->size = 16; //Numero de bits que um registrador guarda
 	this->controlSign = true; // O sinal padrão é true pq esta classe é utilizada para todos os registradores incluindo o PC.
 	reg.resize(7, vector<bool>(size, false));
-	reg[0].resize (18, false);
 	table["PC"] = 0;
 	table["A"] = 1;
 	table["B"] = 2;
@@ -22,19 +21,20 @@ Register::~Register()
 
 void Register::SetValue(string index, vector<bool> value)
 {
+
 	std::stringstream message;
 	message << "Registradores guardam no máximo " << this->size << " bits.\n";
 	
-	if(!this->controlSign && index == "PC") throw "O Controle emite um sinal que não permite escrita neste registrador.";
-	if(index.size() != 3) throw "Endereço inválido de registrador.";
-	if(value.size() > this->size) throw message.str();
-	if(table.find(index) == table.end()) throw "Endereço inválido de registrador.";	
+	if(!this->controlSign && index == "PC"){
+		cout << "Dentro da Funcao\n";
+		return;
+	}
+
+	if(value.size() > this->size) cout << message.str();
+	if(table.find(index) == table.end()) cout << "Endereço inválido de registrador2.\n";	
 	
 	int tam;
-	if(index == "PC")
-		tam = 18;
-	else
-		tam = this->size;
+	tam = this->size;
 	vector<bool> data = value;
 	if(value.size() != tam)
 	{
@@ -45,13 +45,18 @@ void Register::SetValue(string index, vector<bool> value)
 }
 
 vector<bool> Register::GetValue(string index)
-{
-	if(index.size() != 3) throw "Endereço inválido de registrador.";
-	
+{	
 	return reg[table[index]];
 }
 
 void Register::UpdateSign(bool sign)
 {
 	this->controlSign = sign;
+}
+
+void Register::print(string index){
+	for(int i  = reg[table[index]].size()-1  ; i >= 0 ; i-- ){
+		cout << reg[table[index]][i]; 
+	}
+	cout << endl;
 }

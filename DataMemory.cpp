@@ -60,7 +60,7 @@ void DataMemory::update_signal (bool MemRead1, bool MemRead2, bool MemWrite1, bo
 void DataMemory::Print(fstream &file)
 {
 	for (int i = 0; i < dMemory.size(); i++){
-		for (int j = 0; j < dMemory[i].size(); j++){
+		for (int j = dMemory[i].size()-1; j >= 0; j--){
 			file << dMemory[i][j];
 		}
 		file << endl;
@@ -76,38 +76,42 @@ void DataMemory::Clear()
 void DataMemory::Init(ifstream &stream)
 {
 	if(!stream.is_open())
-		throw "A stream do arquivo com dados não está aberta.";
+		cout << "A stream do arquivo com dados não está aberta.\n";
 	
 	string input;
-	int i = -1;
+	int i = 0;
 	vector<bool> data;
 	while(true)
 	{
-		//stream >> input;
-		getline(stream, input);
+		stream >> input;
+		// getline(stream, input);
 		if(not stream) break;
 
-		i++;
+		// i++;
 		if(input.size() == 0) continue;
 		
 		/* Convertendo a string do arquivo de dados para um vector de bools. */
 		data.clear();
-		for(int cont = 0; i < input.size(); i++)
+		for(int cont = input.size(); cont >= 0; cont--)
 		{
-			if(input[cont] == 0)
-				data.insert(data.end(), false);
-			else if(input[cont] == 1)
-				data.insert(data.end(), true);
-			else
-				throw "Dados inválidos no arquivo com dados.";
+			if(input[cont] == '0')
+				data.push_back(false);
+			else if(input[cont] == '1')
+				data.push_back(true);
+			else{
+				cout << "Dados inválidos no arquivo com dados.\n";
+				cout << input[cont] << ' ';
+			}
 		}
+
+		dMemory[i++] = data;
 	}
 }
 
 void DataMemory::SetValue(string index, vector<bool> input)
 {
-	if(input.size() > 16) throw "A memória de dados guarda somente 16 bits por célula.";
-	if(index.size() != 5) throw "Endereço inválido de memória de dados.";	
+	if(input.size() > 16) cout << "A memória de dados guarda somente 16 bits por célula.\n";
+	if(index.size() != 5) cout << "Endereço inválido de memória de dados.\n";	
 
 	vector<bool> data = input;
 	if(input.size() != 16) // Complementando o vector com 0's ate data ter 16 bits.
@@ -120,8 +124,8 @@ void DataMemory::SetValue(string index, vector<bool> input)
 
 void DataMemory::SetValue(int index, vector<bool> input)
 {
-	if(index < 0 || index > 31) throw "Endereço inválido de memória de dados.";
-	if(input.size() > 16) throw "A memória de dados guarda somente 16 bits por célula.";
+	if(index < 0 || index > 31) cout << "Endereço inválido de memória de dados.\n";
+	if(input.size() > 16) cout << "A memória de dados guarda somente 16 bits por célula.\n";
 
 	vector<bool> data = input;
 	if(input.size() != 16) // Complementando o vector com 0's ate date ter 16 bits.
@@ -129,11 +133,21 @@ void DataMemory::SetValue(int index, vector<bool> input)
 		for(int i = input.size(); i < 16; i++)
 			data.push_back(false);
 	}
+cout << "Index " << index << "\nData  : "  ;
+for(int i = data.size()-1 ; i >= 0 ; i--){
+	cout << data[i];
+}
+cout << endl;
 	dMemory[index] = data;
 }
 
 void DataMemory::SetValue(vector<bool> index, vector<bool> input)
 {
+cout << "Recebido : ";
+for(int i = index.size()-1; i >=0 ; i--){
+	cout << index[i];
+}
+cout << endl;
 	if(MemWrite1)
 		SetValue(fromVectorToInt(index), input);
 }
@@ -147,21 +161,22 @@ void DataMemory::SetValue2(vector<bool> index, vector<bool> input)
 // Função que retorna o valor de uma posição do data memory
 vector<bool> DataMemory::GetValue(string index)
 {
-	if(index.size() != 5) throw "Endereço inválido de memória de dados.";
+	if(index.size() != 5) cout << "Endereço inválido de memória de dados.\n";
 	
 	return dMemory[table[index]];
 }
 
 vector<bool> DataMemory::GetValue(int index)
 {
-	if(index < 0 || index > 31) throw "Endereço inválido de memória de dados.";
+	if(index < 0 || index > 31) cout << "Endereço inválido de memória de dados.\n";
 	
 	return dMemory[index];
 }
 
 vector<bool> DataMemory::GetValue(vector<bool> index)
 {
-	return GetValue(fromVectorToInt(index));
+	if(MemRead1 && MemRead2)
+		return GetValue(fromVectorToInt(index));
 }
 
 int fromVectorToInt(vector<bool> input)

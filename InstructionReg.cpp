@@ -15,8 +15,9 @@ InstReg::~InstReg(){
 * Observações: O sinal IRWrite, que vem do controle, deve estar setado como true.
 */
 void InstReg::SetValue(vector<bool> value){
-	if(!IRWrite) throw "Wadafuck Nigga! U Canot do dat!";
-
+	if(!IRWrite) /*cout << "Wadafuck Nigga! U Canot do dat!";*/
+		return;
+		
 	reg = value;	
 }
 
@@ -91,7 +92,7 @@ vector<bool> InstReg::get_immed15(){
 * Observações: lower não pode ser negativo e upper não pode ser maior que 17.
 */
 vector<bool> InstReg::get_bits (int lower, int upper){
-	if (lower < 0 || upper > 17) throw "Limites errados!\n";
+	if (lower < 0 || upper > 17) cout << "Limites errados!\n";
 
 	vector<bool> bits (upper-lower+1, false);
 

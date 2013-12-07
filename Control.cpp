@@ -48,6 +48,7 @@ void Control::SetOPcode(vector<bool> input)
 }
 
 void Control::do_your_job(){
+	init();
 	switch(this->Stage){
 		case 0: 	/*FETCH*/						Fetch(); break;
 		case 1: 	/*BUSCA REGISTRADORES*/			Decode(); break;
@@ -72,6 +73,7 @@ void Control::Fetch(){
 }
 
 void Control::Decode(){
+	
 	MemRead1 = true;
 	MemRead2 = true;
 }
@@ -105,10 +107,10 @@ void Control::Execute(){
 }
 
 void Control::conclui_r(){
-	AddressControl = make_pair(false,true);
+	AddressControl = make_pair(true,false);
 	MemWrite1 = true;
 	MemWrite2 = true;
-	MemDest = make_pair(true,true);
+	MemDest = make_pair(false,true);
 }
 
 void Control::conclui_loadi(){
@@ -207,4 +209,23 @@ void Control::print(){
 	cout << "OPcode : " << OPcode[2] << OPcode[1] << OPcode[0] << endl << endl;
 	
 	return;
+}
+
+void Control::init(){
+	PCWriteCond = false;
+	PCWrite = false;
+	MemINSTRead = false;
+	MemINSTWrite = false;
+	IRWrite = false;
+	MemRead1 = false;
+	MemRead2 = false;
+	MemWrite1 = false;
+	MemWrite2 = false;
+	PCSource = make_pair(false,false);
+	MemDest = make_pair(false,false);
+	AddressControl = make_pair(false,false);
+	ALUOp = make_pair(false,false);
+	ALUSrcB = false;
+	ALUSrcA = false;
+
 }

@@ -40,6 +40,7 @@ class Register
 		void SetValue(string, vector<bool>);
 		vector<bool> GetValue(string);
 		void UpdateSign(bool); // Seta o sinal do controle que permite a escrita no registrador
+		void print(string);
 };
 
 #endif

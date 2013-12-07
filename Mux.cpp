@@ -18,10 +18,10 @@ void Mux::SetControlSign(pair<bool, bool> sign)
 
 void Mux::SetControlSign(bool sign)
 {
-	if(sign)
+	if(!sign)
 		this->controlSign = make_pair(false, false);
 	else
-		this->controlSign = make_pair(false, true);
+		this->controlSign = make_pair(true, false);
 }
 
 pair<bool, bool> Mux::GetControlSign()
@@ -49,9 +49,20 @@ vector<bool> Mux::GetOutput()
 {
 	if(!this->controlSign.first && !this->controlSign.second) // Mux vai retornar a posição 00
 		return this->input[0];
-	else if(!this->controlSign.first && this->controlSign.second) // Mux vai retornar a posição 01
+	else if(this->controlSign.first && !this->controlSign.second) // Mux vai retornar a posição 01
 		return this->input[1];
-	else if(this->controlSign.first && !this->controlSign.second) //Mux vai retornar a posição 10
+	else if(!this->controlSign.first && !this->controlSign.second) //Mux vai retornar a posição 10
 		return this->input[2];
 	else return this->input[3];	//Mux vai retornar a posição 11
+}
+
+void Mux::print(){
+	cout << "Controle : " << controlSign.second << controlSign.first << endl;
+	for(int i = 0 ; i < input.size() ; i++){
+		for(int j = input[i].size()-1 ; j >= 0 ; j--){
+			cout << input[i][j];
+		}
+		cout << endl;
+	}
+	cout << endl;
 }

@@ -66,6 +66,8 @@ class Control{
 		void go_my_children_i_free_you(Alu&, Alu&, InstructionMemory&, DataMemory&, Register&, InstReg& , Mux&, Mux&, Mux&, Mux&, Mux&);
 
 		void print();
+
+		void init();
 };
 
 #endif
