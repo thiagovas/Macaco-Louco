@@ -19,8 +19,10 @@
 #include "Register.hpp"
 #include "InstructionReg.hpp"
 #include "Mux.hpp"
+#include "Adder.hpp"
 #include <fstream>
 using namespace std;
+
 
 int main(int argc, char *argv[])
 {
@@ -41,6 +43,8 @@ int main(int argc, char *argv[])
 	InstReg ir;
 	Mux muxpcsource,muxmemdest,muxaddrescontrol,muxalusrca,muxalusrcb;
 	vector<bool> cte (16,false);
+	Adder ad;
+
 	cte[1] = true;
 	cte[4] = true;
 
@@ -60,10 +64,10 @@ int main(int argc, char *argv[])
 		ir.SetValue( im.get_instruction( regs.GetValue("PC") ) );
 
 
-		regs.SetInput( "A",dm.GetValue(ir.get_rs()) );
-		regs.SetInput( "B",dm.GetValue(ir.get_rt()) );
-		regs.SetInput( "C",dm.GetValue(/*ir.get_rs()+1*/) );
-		regs.SetInput( "D",dm.GetValue(/*ir.get_rt())+1*/ );
+		regs.SetValue( "A",dm.GetValue(ir.get_rs()) );
+		regs.SetValue( "B",dm.GetValue(ir.get_rt()) );
+		regs.SetValue( "C",dm.GetValue( ad.SumOne( ir.get_rs() ) ) );
+		regs.SetValue( "D",dm.GetValue( ad.SumOne( ir.get_rt() ) ) );
 
 		/*COLOCA INPUTS PARA O MUX ALUSrcA*/
 		muxalusrca.SetInput( regs.GetValue("PC") , regs.GetValue("A") );
@@ -73,30 +77,32 @@ int main(int argc, char *argv[])
 
 
 		/*INICIALIZA AS ALUs  E FAZ SUAS OPERAÇÕES*/
-		alu1.set_values(muxalusrca.GetOutput(),muxalusrcb.GetOutput());
-		// alu2.set_values(ir.get_rs(),ir.get_rt());
+		alu1.setvalues(muxalusrca.GetOutput(),muxalusrcb.GetOutput());
+		alu2.setvalues(regs.GetValue("C"),regs.GetValue("D"));
 		alu1.do_operation();
-		// alu2.do_operation();
+		alu2.do_operation();
 
 		/*PASSA VALOR AO REGISTRADOR ALUOUT1*/
-		regs.SetInput( "ALUout1", alu1.result_value() );
+		regs.SetValue( "ALUout1", alu1.result_value() );
 
 		/*PASSA VALOR AO REGISTRADOR ALUOUT2*/
-		regs.SetInput( "ALUout2", alu2.result_value() );
+		regs.SetValue( "ALUout2", alu2.result_value() );
 
 		/*INCLUI INCLUDES PARA O MEMDest (REPARE QUE O CTE NUNCA PODERÁ SER USADO)*/
 		muxmemdest.SetInput(ir.get_rs(),ir.get_rt(),ir.get_rd(),cte);
 		/*INCLUI INPUTS PARA O AddressControl*/
-		muxaddrescontrol.SetInput();
-		im.SetValue(muxmemdest.GetOutput(), muxaddrescontrol.GetOutput() );
+		muxaddrescontrol.SetInput( ir.get_immed5() , regs.GetValue("ALUop1") , ir.get_immed10() , cte );
+		/*GUARDA NA RESPECTIVA POSIÇÃO O DADO ESPECIFICADO*/
+		dm.SetValue(muxmemdest.GetOutput(), muxaddrescontrol.GetOutput() );
+		dm.SetValue2( ad.SumOne(ir.get_rd() ) , regs.GetValue("ALUout2") );
 
 
 		/*INCLUI AS ENTRADAS AO PCSource E USA SEU OUTPUT PARA SETAR O PC*/
 		muxpcsource.SetInput(alu1.result_value(),ir.get_immed5(),ir.get_immed15(),regs.GetValue("A"));
 		regs.SetValue("PC",muxpcsource.GetOutput());
 
-
-
+		/*PASSA PARA O PRÓXIMO ESTÁGIO*/
+		controle.next_stage();
 	}
 	
 	
@@ -108,4 +114,5 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
+
 

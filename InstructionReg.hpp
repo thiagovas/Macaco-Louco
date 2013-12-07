@@ -39,6 +39,7 @@ class InstReg
 		vector<bool> get_rd();
 		vector<bool> get_immed5();
 		vector<bool> get_immed10();
+		vector<bool> get_immed15();
 		vector<bool> get_bits (int,int);
 };
 

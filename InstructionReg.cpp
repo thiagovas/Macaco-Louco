@@ -38,6 +38,10 @@ vector<bool> InstReg::get_immed10(){
 	return get_bits(0,9);
 }
 
+vector<bool> InstReg::get_immed15(){
+	return get_bits(0,14);
+}
+
 vector<bool> InstReg::get_bits (int lower, int upper){
 	if (lower < 0 || upper > 17) throw "Limites errados!\n";
 
