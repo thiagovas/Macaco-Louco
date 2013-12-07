@@ -86,6 +86,7 @@ class InstReg
 		* Observações: Nenhum
 		*/
 		vector<bool> get_immed10();
+<<<<<<< HEAD
 		
 		/*
 		* Função: Retorna os bits que estão no intervalo [lower, upper]
@@ -102,6 +103,10 @@ class InstReg
 		* Observações: Nenhum.
 		*/
 		void update_sign(bool);
+=======
+		vector<bool> get_immed15();
+		vector<bool> get_bits (int,int);
+>>>>>>> feaabcea8d179e1df8b50f7a81e4b08a220c90f9
 };
 
 #endif

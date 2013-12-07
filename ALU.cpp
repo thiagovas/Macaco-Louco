@@ -12,7 +12,7 @@
 
 
 /*INICIALIZA VALORES*/
-void Alu::setvalues(vector<bool> input_a, vector<bool> input_b, bool first_bit, bool second_bit){
+void Alu::setvalues(vector<bool> input_a, vector<bool> input_b){
 	a = input_a;
 	b = input_b;
 	zero = false;
