@@ -49,7 +49,7 @@ void Alu::do_operation(){
 		/*VERIFICA FLAG ZERO PARA O BRANCH*/
 		case 1: this->zero = sub(); return;
 		case 2: alu_and(); return;
-		case 3: alu_or(); return;
+		cas 3: alu_or(); return;
 		default: cout << "O ALUop passado nao esta correto!!\nFuncao: Alu::do_operation\n";
 	}
 }
